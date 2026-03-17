@@ -1,0 +1,43 @@
+name: Commit Message Check
+
+on:
+  pull_request:
+    branches: [ main ]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  commit-lint:
+    name: Commit Message Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check commit messages
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const commits = await github.rest.pulls.listCommits({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number
+            });
+
+            const regex = /^(feat|fix|docs|refactor):/;
+            let failed = false;
+
+            for (const commit of commits.data) {
+              const message = commit.commit.message.split('\n')[0];
+
+              if (!regex.test(message)) {
+                core.error(`Invalid commit: ${message}`);
+                failed = true;
+              } else {
+                console.log(`Valid: ${message}`);
+              }
+            }
+
+            if (failed) {
+              core.setFailed("Commit validation failed");
+            }

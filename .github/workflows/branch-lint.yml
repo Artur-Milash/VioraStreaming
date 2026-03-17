@@ -1,0 +1,30 @@
+name: Branch Name Check
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  branch-name:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check branch names
+        run: |
+          branch="${{ github.head_ref }}"
+
+          echo "Branch name: $branch"
+
+          regex="^(feature|fix|refactor|test)/[a-z]+-[0-9]+-.+"
+
+          if [[ ! $branch =~ $regex ]]; then
+            echo "Invalid branch name"
+            echo "Expected format: feature/task-123-description"
+            exit 1
+          else
+            echo "Branch name is valid"
+          fi
