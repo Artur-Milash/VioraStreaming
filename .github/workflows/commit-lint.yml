@@ -30,6 +30,11 @@ jobs:
             for (const commit of commits.data) {
               const message = commit.commit.message.split('\n')[0];
 
+ 	      if (message.startsWith("Merge ")) {
+    		console.log(`Skipping merge commit: ${message}`);
+    		continue;
+  	      }
+
               if (!regex.test(message)) {
                 core.error(`Invalid commit: ${message}`);
                 failed = true;
