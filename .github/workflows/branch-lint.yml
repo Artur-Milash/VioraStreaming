@@ -19,7 +19,7 @@ jobs:
 
           echo "Branch name: $branch"
 
-          regex="^(feature|fix|refactor|test)/[a-z]+-[0-9]+-.+"
+          regex="^(feature|fix|refactor|test)/vs-[0-9]+"
 
           if [[ ! $branch =~ $regex ]]; then
             echo "Invalid branch name"
