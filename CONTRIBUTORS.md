@@ -1,2 +1,3 @@
 Milash Artur
 Dobrianskyi Volodymyr
+Klyvchuk Anastasia
