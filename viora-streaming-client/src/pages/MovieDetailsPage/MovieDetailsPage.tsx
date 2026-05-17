@@ -38,7 +38,6 @@ export function MovieDetailsPage() {
         {discussionOpen && (
             <MovieDiscussionPanel
                 movieId={movie.id}
-                movieTitle={movie.title}
                 onClose={() => setDiscussionOpen(false)}
                 sx={{position: "sticky", top: "80px", height: "calc(100vh - 80px)"}}
             />

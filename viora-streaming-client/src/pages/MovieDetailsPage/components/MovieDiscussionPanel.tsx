@@ -17,12 +17,11 @@ import {useMovieDiscussion} from "../../../hooks/useMovieDiscussion.ts";
 
 type Props = {
   movieId: number;
-  movieTitle: string;
   onClose: () => void;
   sx?: SxProps<Theme>;
 };
 
-export function MovieDiscussionPanel({movieId, movieTitle, onClose, sx}: Props) {
+export function MovieDiscussionPanel({movieId, onClose, sx}: Props) {
   const [input, setInput] = useState("");
   const bottomRef = useRef<HTMLDivElement>(null);
   const {messages, isLoadingMessages, isSending, send} = useMovieDiscussion(movieId);

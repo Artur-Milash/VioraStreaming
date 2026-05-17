@@ -379,7 +379,6 @@ export function Player({
         {chatOpen && (
             <MovieDiscussionPanel
                 movieId={dbMovieId}
-                movieTitle={title}
                 onClose={() => setChatOpen(false)}
                 sx={{height: "100%", borderLeft: "1px solid rgba(255,255,255,0.1)"}}
             />
