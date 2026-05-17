@@ -32,7 +32,7 @@ public class SecurityConfigs {
                   "/api/v1/verification/accounts/*")
               .anonymous();
           authorize.requestMatchers("/swagger-ui/*", "/v3/api-docs", "/v3/api-docs.yaml",
-                  "/v3/api-docs/*")
+                  "/v3/api-docs/*", "/api/v1/test")
               .permitAll();
           authorize.requestMatchers("/actuator", "/actuator/*").permitAll();
           authorize.anyRequest().authenticated();
