@@ -8,4 +8,5 @@ export const API_PATHS = {
   history: "/api/v1/history",
   account: "/api/v1/accounts",
   dropPassword: "/api/v1/accounts/drop-password",
+  moodMovies: "/api/v1/ai/mood-movies",
 }

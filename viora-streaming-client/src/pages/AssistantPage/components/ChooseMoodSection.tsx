@@ -11,7 +11,7 @@ type ChooseMoodSectionProps = {
 };
 
 export function ChooseMoodSection({onFindMovies, isLoading = false}: ChooseMoodSectionProps) {
-  const [selectedMood, setSelectedMood] = useState<string>(MOODS[0].name);
+  const [selectedMood, setSelectedMood] = useState<Mood>(MOODS[0]);
 
 
   return (
@@ -36,8 +36,8 @@ export function ChooseMoodSection({onFindMovies, isLoading = false}: ChooseMoodS
               <Grid item key={mood.name} size={{xs: 12, sm: 6, md: 4, lg: 3}}>
                 <MoodCard
                     mood={mood}
-                    isSelected={mood.name === selectedMood}
-                    onClick={() => setSelectedMood(mood.name)}/>
+                    isSelected={mood.name === selectedMood.name}
+                    onClick={() => setSelectedMood(mood)}/>
               </Grid>
           ))}
         </Grid>
@@ -47,7 +47,7 @@ export function ChooseMoodSection({onFindMovies, isLoading = false}: ChooseMoodS
           <VioraButton
               name={"Find my movies"}
               sx={{maxWidth: "185px"}}
-              onClick={onFindMovies}
+              onClick={() => onFindMovies(selectedMood)}
               loading={isLoading}
           />
         </Stack>

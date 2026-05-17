@@ -45,6 +45,11 @@ export interface Person {
   photo: string;
 }
 
+export interface MoodMovieSuggestion {
+  movie: MovieSummary;
+  matchLabel: string;
+}
+
 export interface MovieDetails {
   id: number,
   title: string,
