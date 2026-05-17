@@ -28,20 +28,22 @@ export function MovieDetailsPage() {
   };
 
   return (
-      <>
-        <Box sx={{py: "50px", px: "48px"}}>
+      <Box sx={{display: "flex", minHeight: "100%"}}>
+        <Box sx={{flex: 1, py: "50px", px: "48px", minWidth: 0}}>
           <Stack spacing="64px" sx={{maxWidth: "1280px", margin: "0 auto"}}>
             <MovieDetails movie={movie} onPlay={handlePlay} onDiscuss={() => setDiscussionOpen(true)}/>
             <MovieCast actors={movie?.actors ?? []}/>
           </Stack>
         </Box>
-        <MovieDiscussionPanel
-            movieId={movie.id}
-            movieTitle={movie.title}
-            open={discussionOpen}
-            onClose={() => setDiscussionOpen(false)}
-        />
-      </>
+        {discussionOpen && (
+            <MovieDiscussionPanel
+                movieId={movie.id}
+                movieTitle={movie.title}
+                onClose={() => setDiscussionOpen(false)}
+                sx={{position: "sticky", top: "80px", height: "calc(100vh - 80px)"}}
+            />
+        )}
+      </Box>
   );
 }
 

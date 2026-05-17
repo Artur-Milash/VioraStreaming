@@ -32,6 +32,7 @@ export function MoviePlayer() {
   return (
       <Player
           movieId={imdbId}
+          dbMovieId={Number(id)}
           apiBaseUrl={API_BASE}
           title={title}
           onClose={() => navigate(-1)}

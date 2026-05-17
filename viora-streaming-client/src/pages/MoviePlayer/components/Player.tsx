@@ -26,9 +26,11 @@ import {
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import {useHls} from "../../../hooks/useHls.ts";
 import {API_PATHS} from "../../../constants/apiConstants.ts";
+import {MovieDiscussionPanel} from "../../MovieDetailsPage/components/MovieDiscussionPanel.tsx";
 
 interface PlayerProps {
   movieId: string;
+  dbMovieId: number;
   apiBaseUrl: string;
   title?: string;
   onClose?: () => void;
@@ -52,6 +54,7 @@ function formatRemaining(current: number, total: number): string {
 
 export function Player({
                          movieId,
+                         dbMovieId,
                          apiBaseUrl,
                          title = "Now Playing",
                          onClose,
@@ -69,6 +72,7 @@ export function Player({
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [isVideoLoading, setIsVideoLoading] = useState(true);
   const [showControls, setShowControls] = useState(true);
+  const [chatOpen, setChatOpen] = useState(false);
 
   const playlistUrl = `${apiBaseUrl}${API_PATHS.streaming}/${movieId}/index.m3u8`;
 
@@ -174,205 +178,212 @@ export function Player({
   return (
       <Box
           ref={containerRef}
-          onMouseMove={resetControlsTimer}
-          onMouseLeave={() => isPlaying && setShowControls(false)}
           sx={{
             position: "fixed",
             inset: 0,
             zIndex: 1400,
-            bgcolor: "#000",
             display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            cursor: showControls ? "default" : "none"
           }}
       >
+        {/* ── Video area ── */}
         <Box
-            component="video"
-            ref={videoRef}
-            onClick={togglePlay}
-            sx={{width: "100%", height: "100%", objectFit: "contain", display: "block"}}
-        />
-
-        {isLoading && (
-            <Box sx={{
-              position: "absolute",
-              inset: 0,
+            onMouseMove={resetControlsTimer}
+            onMouseLeave={() => isPlaying && setShowControls(false)}
+            sx={{
+              flex: 1,
+              position: "relative",
+              bgcolor: "#000",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              pointerEvents: "none"
-            }}>
-              <CircularProgress color="primary" size={64} thickness={2}/>
-            </Box>
-        )}
-
-        {hlsError && (
-            <Box sx={{
-              position: "absolute",
-              inset: 0,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              pointerEvents: "none"
-            }}>
-              <Typography color="error" variant="body2">{hlsError}</Typography>
-            </Box>
-        )}
-
-        <Fade in={showControls}>
+              cursor: showControls ? "default" : "none",
+              minWidth: 0,
+            }}
+        >
           <Box
-              sx={{
+              component="video"
+              ref={videoRef}
+              onClick={togglePlay}
+              sx={{width: "100%", height: "100%", objectFit: "contain", display: "block"}}
+          />
+
+          {isLoading && (
+              <Box sx={{
                 position: "absolute",
                 inset: 0,
                 display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-                background:
-                    "linear-gradient(to bottom, rgba(0,0,0,0.72) 0%, transparent 18%, transparent 68%, rgba(0,0,0,0.88) 100%)",
-              }}
-          >
-            <Stack direction="row" spacing="16px" sx={{
-              p: "24px 32px",
-              alignItems: "center",
-            }}>
-              {onClose && (
-                  <IconButton
-                      onClick={onClose}
-                      disableRipple
-                      sx={{p: 0, "&:hover": {bgcolor: "transparent"}}}
-                  >
-                    <Box
-                        sx={{
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          height: 44,
-                          width: 44,
-                          bgcolor: "secondary.main",
-                          borderRadius: "50%",
-                          transition: "opacity 0.2s",
-                          "&:hover": {opacity: 0.75},
-                        }}
-                    >
-                      <KeyboardBackspaceIcon sx={{color: "text.primary", fontSize: 20}}/>
-                    </Box>
-                  </IconButton>
-              )}
-
-              <Box sx={{flex: 1}}>
-                <Typography variant="h6"
-                            sx={{color: "text.primary", fontWeight: 700, lineHeight: 1.2}}>
-                  {title}
-                </Typography>
+                alignItems: "center",
+                justifyContent: "center",
+                pointerEvents: "none",
+              }}>
+                <CircularProgress color="primary" size={64} thickness={2}/>
               </Box>
+          )}
 
-              <Chip
-                  icon={<AutoAwesome sx={{fontSize: 15}}/>}
-                  label="AI"
-                  size="small"
-                  variant="outlined"
-                  sx={{
-                    color: "primary.main",
-                    borderColor: "primary.main",
-                    fontWeight: 700,
-                    letterSpacing: 0.5,
-                    height: 28,
-                    "& .MuiChip-icon": {ml: "6px", color: "primary.main"},
-                  }}
-              />
-            </Stack>
+          {hlsError && (
+              <Box sx={{
+                position: "absolute",
+                inset: 0,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                pointerEvents: "none",
+              }}>
+                <Typography color="error" variant="body2">{hlsError}</Typography>
+              </Box>
+          )}
 
-            <Box sx={{display: "flex", alignItems: "center", justifyContent: "center", gap: 3}}>
-              <Tooltip title="Replay 10s">
-                <IconButton onClick={() => skip(-10)} sx={centerGhostBtnSx}>
-                  <Replay10 sx={{fontSize: 36, color: "text.secondary"}}/>
-                </IconButton>
-              </Tooltip>
-
-              <IconButton
-                  onClick={togglePlay}
-                  sx={{
-                    color: "#fff",
-                    bgcolor: "primary.main",
-                    width: 64,
-                    height: 64,
-                    transition: "all 0.18s",
-                    "&:hover": {bgcolor: "primary.dark", transform: "scale(1.08)"},
-                  }}
-              >
-                {isPlaying ? <Pause sx={{fontSize: 38}}/> : <PlayArrow sx={{fontSize: 38}}/>}
-              </IconButton>
-
-              <Tooltip title="Forward 10s">
-                <IconButton onClick={() => skip(10)} sx={centerGhostBtnSx}>
-                  <Forward10 sx={{fontSize: 36, color: "text.secondary"}}/>
-                </IconButton>
-              </Tooltip>
-            </Box>
-
-            <Box sx={{px: "20px", pb: "20px"}}>
-              <Stack spacing="14px">
-                <Box sx={{
+          <Fade in={showControls}>
+            <Box
+                sx={{
+                  position: "absolute",
+                  inset: 0,
                   display: "flex",
-                  alignItems: "center",
+                  flexDirection: "column",
                   justifyContent: "space-between",
-                  color: "text.primary",
-                }}>
-                  <Typography sx={timeSx}>
-                    {formatTime(currentTime)}
-                  </Typography>
-                  <Typography sx={timeSx}>
-                    {formatRemaining(currentTime, duration)}
-                  </Typography>
-                </Box>
+                  background:
+                      "linear-gradient(to bottom, rgba(0,0,0,0.72) 0%, transparent 18%, transparent 68%, rgba(0,0,0,0.88) 100%)",
+                }}
+            >
+              <Stack direction="row" spacing="16px" sx={{p: "24px 32px", alignItems: "center"}}>
+                {onClose && (
+                    <IconButton
+                        onClick={onClose}
+                        disableRipple
+                        sx={{p: 0, "&:hover": {bgcolor: "transparent"}}}
+                    >
+                      <Box sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        height: 44,
+                        width: 44,
+                        bgcolor: "secondary.main",
+                        borderRadius: "50%",
+                        transition: "opacity 0.2s",
+                        "&:hover": {opacity: 0.75},
+                      }}>
+                        <KeyboardBackspaceIcon sx={{color: "text.primary", fontSize: 20}}/>
+                      </Box>
+                    </IconButton>
+                )}
+
                 <Box sx={{flex: 1}}>
-                  <Slider
-                      min={0}
-                      max={duration || 1}
-                      value={currentTime}
-                      onChange={seek}
-                      sx={progressSliderSx}
-                  />
+                  <Typography variant="h6" sx={{color: "text.primary", fontWeight: 700, lineHeight: 1.2}}>
+                    {title}
+                  </Typography>
                 </Box>
 
+                <Chip
+                    icon={<AutoAwesome sx={{fontSize: 15}}/>}
+                    label="AI"
+                    size="small"
+                    onClick={() => setChatOpen((o) => !o)}
+                    sx={{
+                      border: "1px solid",
+                      borderColor: "primary.main",
+                      color: chatOpen ? "primary.contrastText" : "primary.main",
+                      backgroundColor: chatOpen ? "primary.main" : "transparent",
+                      fontWeight: 700,
+                      letterSpacing: 0.5,
+                      height: 28,
+                      cursor: "pointer",
+                      "& .MuiChip-icon": {ml: "6px", color: chatOpen ? "primary.contrastText" : "primary.main"},
+                      "&:hover": {backgroundColor: chatOpen ? "primary.dark" : "rgba(255,255,255,0.08)"},
+                    }}
+                />
               </Stack>
 
-              <Stack direction="row" sx={{
-                alignItems: "center",
-                justifyContent: "space-between",
-              }}>
-
-                <Stack direction="row" spacing="2px" sx={{alignItems: "center"}}>
-
-                  <IconButton onClick={togglePlay} sx={bottomBtnSx}>
-                    {isPlaying ? <Pause/> : <PlayArrowOutlined/>}
-                  </IconButton>
-
-                  <IconButton onClick={toggleMute} sx={{...bottomBtnSx, ml: "8px !important"}}>
-                    <VolumeIcon/>
-                  </IconButton>
-                  <Slider
-                      min={0}
-                      max={1}
-                      step={0.01}
-                      value={isMuted ? 0 : volume}
-                      onChange={handleVolumeChange}
-                      sx={{...volumeSliderSx, width: 200}}
-                  />
-                </Stack>
-
-                <Box sx={{flex: 1}}/>
-
-                <Tooltip title={isFullscreen ? "Exit Fullscreen" : "Fullscreen"}>
-                  <IconButton onClick={toggleFullscreen} sx={bottomBtnSx}>
-                    {isFullscreen ? <FullscreenExit/> : <Fullscreen/>}
+              <Box sx={{display: "flex", alignItems: "center", justifyContent: "center", gap: 3}}>
+                <Tooltip title="Replay 10s">
+                  <IconButton onClick={() => skip(-10)} sx={centerGhostBtnSx}>
+                    <Replay10 sx={{fontSize: 36, color: "text.secondary"}}/>
                   </IconButton>
                 </Tooltip>
-              </Stack>
+
+                <IconButton
+                    onClick={togglePlay}
+                    sx={{
+                      color: "#fff",
+                      bgcolor: "primary.main",
+                      width: 64,
+                      height: 64,
+                      transition: "all 0.18s",
+                      "&:hover": {bgcolor: "primary.dark", transform: "scale(1.08)"},
+                    }}
+                >
+                  {isPlaying ? <Pause sx={{fontSize: 38}}/> : <PlayArrow sx={{fontSize: 38}}/>}
+                </IconButton>
+
+                <Tooltip title="Forward 10s">
+                  <IconButton onClick={() => skip(10)} sx={centerGhostBtnSx}>
+                    <Forward10 sx={{fontSize: 36, color: "text.secondary"}}/>
+                  </IconButton>
+                </Tooltip>
+              </Box>
+
+              <Box sx={{px: "20px", pb: "20px"}}>
+                <Stack spacing="14px">
+                  <Box sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    color: "text.primary",
+                  }}>
+                    <Typography sx={timeSx}>{formatTime(currentTime)}</Typography>
+                    <Typography sx={timeSx}>{formatRemaining(currentTime, duration)}</Typography>
+                  </Box>
+                  <Box sx={{flex: 1}}>
+                    <Slider
+                        min={0}
+                        max={duration || 1}
+                        value={currentTime}
+                        onChange={seek}
+                        sx={progressSliderSx}
+                    />
+                  </Box>
+                </Stack>
+
+                <Stack direction="row" sx={{alignItems: "center", justifyContent: "space-between"}}>
+                  <Stack direction="row" spacing="2px" sx={{alignItems: "center"}}>
+                    <IconButton onClick={togglePlay} sx={bottomBtnSx}>
+                      {isPlaying ? <Pause/> : <PlayArrowOutlined/>}
+                    </IconButton>
+                    <IconButton onClick={toggleMute} sx={{...bottomBtnSx, ml: "8px !important"}}>
+                      <VolumeIcon/>
+                    </IconButton>
+                    <Slider
+                        min={0}
+                        max={1}
+                        step={0.01}
+                        value={isMuted ? 0 : volume}
+                        onChange={handleVolumeChange}
+                        sx={{...volumeSliderSx, width: 200}}
+                    />
+                  </Stack>
+
+                  <Box sx={{flex: 1}}/>
+
+                  <Tooltip title={isFullscreen ? "Exit Fullscreen" : "Fullscreen"}>
+                    <IconButton onClick={toggleFullscreen} sx={bottomBtnSx}>
+                      {isFullscreen ? <FullscreenExit/> : <Fullscreen/>}
+                    </IconButton>
+                  </Tooltip>
+                </Stack>
+              </Box>
             </Box>
-          </Box>
-        </Fade>
+          </Fade>
+        </Box>
+
+        {/* ── Chat panel ── */}
+        {chatOpen && (
+            <MovieDiscussionPanel
+                movieId={dbMovieId}
+                movieTitle={title}
+                onClose={() => setChatOpen(false)}
+                sx={{height: "100%", borderLeft: "1px solid rgba(255,255,255,0.1)"}}
+            />
+        )}
       </Box>
   );
 }
