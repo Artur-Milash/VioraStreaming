@@ -33,7 +33,7 @@ export function ChooseMoodSection({onFindMovies, isLoading = false}: ChooseMoodS
         </Stack>
         <Grid container spacing={2}>
           {MOODS.map((mood) => (
-              <Grid item key={mood.name} size={{xs: 12, sm: 6, md: 4, lg: 3}}>
+              <Grid key={mood.name} size={{xs: 12, sm: 6, md: 4, lg: 3}}>
                 <MoodCard
                     mood={mood}
                     isSelected={mood.name === selectedMood.name}

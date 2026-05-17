@@ -219,7 +219,7 @@ function MatchedMovie({suggestion}: { suggestion: MoodMovieSuggestion }) {
             height: "100%",
             pt: "40px",
           }}>
-            <Stack p={2} spacing={1}>
+            <Stack spacing={1}>
               <Typography variant="h6" sx={{fontWeight: "bold"}}>
                 {movie.title}
               </Typography>

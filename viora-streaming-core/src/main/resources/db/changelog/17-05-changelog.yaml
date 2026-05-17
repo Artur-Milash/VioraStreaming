@@ -1,0 +1,117 @@
+databaseChangeLog:
+  - changeSet:
+      id: 17052026-1
+      author: vovchikPersonal
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createSequence:
+            incrementBy: 50
+            sequenceName: movie_discussion_seq
+            startValue: 1
+  - changeSet:
+      id: 17052026-2
+      author: vovchikPersonal
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            tableName: movie_discussion
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_movie_discussion
+              - column:
+                  name: account_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: movie_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 17052026-3
+      author: vovchikPersonal
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: movie_discussion
+            baseColumnNames: account_id
+            constraintName: FK_MOVIE_DISCUSSION_ON_ACCOUNT
+            referencedTableName: accounts
+            referencedColumnNames: id
+  - changeSet:
+      id: 17052026-4
+      author: vovchikPersonal
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: movie_discussion
+            baseColumnNames: movie_id
+            constraintName: FK_MOVIE_DISCUSSION_ON_MOVIE
+            referencedTableName: movies
+            referencedColumnNames: id
+  - changeSet:
+      id: 17052026-5
+      author: vovchikPersonal
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createSequence:
+            incrementBy: 50
+            sequenceName: discussion_message_seq
+            startValue: 1
+  - changeSet:
+      id: 17052026-6
+      author: vovchikPersonal
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createTable:
+            tableName: discussion_message
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: pk_discussion_message
+              - column:
+                  name: discussion_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: role
+                  type: VARCHAR(10)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: content
+                  type: TEXT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+  - changeSet:
+      id: 17052026-7
+      author: vovchikPersonal
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: discussion_message
+            baseColumnNames: discussion_id
+            constraintName: FK_DISCUSSION_MESSAGE_ON_DISCUSSION
+            referencedTableName: movie_discussion
+            referencedColumnNames: id
