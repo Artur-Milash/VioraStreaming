@@ -1,3 +1,4 @@
+import {useState} from "react";
 import {useParams, useNavigate} from "react-router";
 import {useMovie} from "../../hooks/useMovie.ts";
 import {Box, Button, Chip, CircularProgress, Stack, Typography} from "@mui/material";
@@ -5,12 +6,14 @@ import type {MovieDetails, Person} from "../../types/movieTypes.ts";
 import AddIcon from "@mui/icons-material/Add";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import {MovieAssistantEnabler} from "./components/MovieAssistantEnabler.tsx";
+import {MovieDiscussionPanel} from "./components/MovieDiscussionPanel.tsx";
 import {API_PAGE} from "../../constants/routingConstants.ts";
 
 export function MovieDetailsPage() {
   const {id} = useParams<{ id: string }>();
   const navigate = useNavigate();
   const {movie, isLoading} = useMovie(Number(id));
+  const [discussionOpen, setDiscussionOpen] = useState(false);
 
   if (isLoading || !movie) {
     return (
@@ -25,21 +28,30 @@ export function MovieDetailsPage() {
   };
 
   return (
-      <Box sx={{py: "50px", px: "48px"}}>
-        <Stack spacing="64px" sx={{maxWidth: "1280px", margin: "0 auto"}}>
-          <MovieDetails movie={movie} onPlay={handlePlay}/>
-          <MovieCast actors={movie?.actors ?? []}/>
-        </Stack>
-      </Box>
+      <>
+        <Box sx={{py: "50px", px: "48px"}}>
+          <Stack spacing="64px" sx={{maxWidth: "1280px", margin: "0 auto"}}>
+            <MovieDetails movie={movie} onPlay={handlePlay} onDiscuss={() => setDiscussionOpen(true)}/>
+            <MovieCast actors={movie?.actors ?? []}/>
+          </Stack>
+        </Box>
+        <MovieDiscussionPanel
+            movieId={movie.id}
+            movieTitle={movie.title}
+            open={discussionOpen}
+            onClose={() => setDiscussionOpen(false)}
+        />
+      </>
   );
 }
 
 type MovieDetailsProps = {
   movie: MovieDetails;
   onPlay: () => void;
+  onDiscuss: () => void;
 };
 
-function MovieDetails({movie, onPlay}: MovieDetailsProps) {
+function MovieDetails({movie, onPlay, onDiscuss}: MovieDetailsProps) {
   return (
       <Stack
           spacing="48px"
@@ -102,8 +114,10 @@ function MovieDetails({movie, onPlay}: MovieDetailsProps) {
           </Stack>
         </Stack>
 
-        <MovieAssistantEnabler content="" onButtonClick={() => {
-        }}/>
+        <MovieAssistantEnabler
+            content={`Have questions about "${movie.title}"? Ask our AI about the plot, themes, characters, and more.`}
+            onButtonClick={onDiscuss}
+        />
       </Stack>
   );
 }

@@ -9,4 +9,5 @@ export const API_PATHS = {
   account: "/api/v1/accounts",
   dropPassword: "/api/v1/accounts/drop-password",
   moodMovies: "/api/v1/ai/mood-movies",
+  discussions: "/api/v1/ai/discussions",
 }

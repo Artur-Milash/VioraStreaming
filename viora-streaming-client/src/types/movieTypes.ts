@@ -50,6 +50,19 @@ export interface MoodMovieSuggestion {
   matchLabel: string;
 }
 
+export interface Discussion {
+  id: number;
+  movieId: number;
+  createdAt: number;
+}
+
+export interface DiscussionMessage {
+  id: number;
+  role: "USER" | "AI";
+  content: string;
+  createdAt: number;
+}
+
 export interface MovieDetails {
   id: number,
   title: string,

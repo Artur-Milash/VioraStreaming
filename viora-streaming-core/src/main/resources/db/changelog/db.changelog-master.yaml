@@ -9,3 +9,5 @@ databaseChangeLog:
       file: db/changelog/06-01-changelog.yaml
   - include:
       file: db/changelog/09-01-changelog.yaml
+  - include:
+      file: db/changelog/17-05-changelog.yaml
