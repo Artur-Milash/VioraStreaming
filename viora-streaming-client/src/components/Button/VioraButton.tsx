@@ -5,9 +5,10 @@ type VioraButtonProps = {
   onClick?: () => void;
   type?: 'submit' | 'button' | 'reset';
   loading?: boolean;
+  sx?: object;
 };
 
-export function VioraButton({name, onClick, type = 'submit', loading = false}: VioraButtonProps) {
+export function VioraButton({name, onClick, type = 'submit', loading = false, sx}: VioraButtonProps) {
   return (
       <Button
           type={type}
@@ -15,6 +16,7 @@ export function VioraButton({name, onClick, type = 'submit', loading = false}: V
           disabled={loading}
           onClick={onClick}
           sx={{
+            ...sx,
             mt: 3,
             py: 1.5,
             borderRadius: 3,
