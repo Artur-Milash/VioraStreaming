@@ -6,10 +6,13 @@ import userAvatar from "../../assets/user-acc-img.jpg";
 import {useDispatch} from "react-redux";
 import type {AppDispatch} from "../../store/store.ts";
 import {setTitle} from "../../store/filterSlice.ts";
+import {useNavigate} from "react-router-dom";
+import {API_PAGE} from "../../constants/routingConstants.ts";
 
 export function Header() {
 
   const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
 
   return (
       <AppBar
@@ -55,6 +58,7 @@ export function Header() {
             <Stack direction="row">
               <Avatar
                   src={userAvatar}
+                  onClick={() => navigate(API_PAGE.Settings)}
                   sx={{
                     width: 40,
                     height: 40,
