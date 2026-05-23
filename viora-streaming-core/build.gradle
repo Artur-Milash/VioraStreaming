@@ -18,6 +18,16 @@ java {
     }
 }
 
+test {
+    useJUnitPlatform()
+
+    testLogging {
+        events "passed", "failed", "skipped"
+        showStandardStreams = true
+        exceptionFormat = "full"
+    }
+}
+
 repositories {
     mavenCentral()
 }
