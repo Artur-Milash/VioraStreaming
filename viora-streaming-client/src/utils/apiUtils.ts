@@ -1,10 +1,31 @@
 export const API_BASE = import.meta.env.VITE_API_URL ?? 'http://localhost:8080'
 
 const tokenName = "JWT_TOKEN";
+const tokenExpiryName = "JWT_TOKEN_EXPIRY";
+const TOKEN_DURATION_MS = 60 * 60 * 1000;
 
-export const getToken = () => localStorage.getItem(tokenName);
+export const getToken = (): string | null => {
+  const token = localStorage.getItem(tokenName);
+  if (!token) return null;
 
-export const removeToken = () => localStorage.removeItem(tokenName);
+  const expiry = localStorage.getItem(tokenExpiryName);
+  if (!expiry || Date.now() > Number(expiry)) {
+    localStorage.removeItem(tokenName);
+    localStorage.removeItem(tokenExpiryName);
+    return null;
+  }
+
+  return token;
+};
+
+export const removeToken = () => {
+  localStorage.removeItem(tokenName);
+  localStorage.removeItem(tokenExpiryName);
+};
+
+export const saveTokenExpiry = () => {
+  localStorage.setItem(tokenExpiryName, String(Date.now() + TOKEN_DURATION_MS));
+};
 
 export class ApiError extends Error {
   public status: number;

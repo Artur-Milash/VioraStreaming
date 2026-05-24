@@ -1,8 +1,9 @@
 import {useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {API_PAGE} from "../constants/routingConstants.ts";
+import {getToken, removeToken} from "../utils/apiUtils.ts";
 
-const isTokenExpired = (token: string): boolean => {
+const isJwtExpired = (token: string): boolean => {
   try {
     const payload = JSON.parse(atob(token.split('.')[1]));
     return payload.exp * 1000 < Date.now();
@@ -15,10 +16,10 @@ const useLogin = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem('JWT_TOKEN');
+    const token = getToken();
 
-    if (!token || isTokenExpired(token)) {
-      localStorage.removeItem('JWT_TOKEN');
+    if (!token || isJwtExpired(token)) {
+      removeToken();
       navigate(API_PAGE.Auth, {replace: true});
     }
   }, [navigate]);

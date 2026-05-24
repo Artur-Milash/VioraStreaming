@@ -1,11 +1,12 @@
 import {createSlice, type PayloadAction} from "@reduxjs/toolkit";
+import {getToken, removeToken, saveTokenExpiry} from "../utils/apiUtils.ts";
 
 interface AuthState {
   token: string | null;
 }
 
 const initialState: AuthState = {
-  token: localStorage.getItem("JWT_TOKEN"),
+  token: getToken(),
 };
 
 const authSlice = createSlice({
@@ -18,9 +19,14 @@ const authSlice = createSlice({
     ) {
       state.token = action.payload.token;
       localStorage.setItem("JWT_TOKEN", action.payload.token);
-    }
+      saveTokenExpiry();
+    },
+    clearCredentials(state) {
+      state.token = null;
+      removeToken();
+    },
   },
 });
 
-export const {setCredentials} = authSlice.actions;
+export const {setCredentials, clearCredentials} = authSlice.actions;
 export default authSlice.reducer;
