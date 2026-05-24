@@ -10,44 +10,54 @@ import {HistoryPage} from "./pages/HistoryPage/HistoryPage.tsx";
 import {AppLayoutWithSideNav} from "./components/Layout/AppLayoutWithSideNav.tsx";
 import {SettingsPage} from "./pages/SettingsPage/SettingsPage.tsx";
 import {AssistantPage} from "./pages/AssistantPage/AssistantPage.tsx";
+import {ErrorPage} from "./pages/ErrorPage/ErrorPage.tsx";
 
 export const routes: RouteObject[] = [
   {
-    path: '/',
-    element: <Navigate to={API_PAGE.Home} replace/>
-  },
-  {
-    path: API_PAGE.Auth,
-    element: <AnonRoute/>,
-    children: WelcomePageChildRoutes,
-  },
-  {
-    element: <ProtectedRoute/>,
+    errorElement: <ErrorPage/>,
     children: [
       {
-        path: API_PAGE.Movies,
-        children: MoviesPageChildRoutes,
-      }
-    ]
-  },
-  {
-    element: <AppLayoutWithSideNav/>,
-    children: [
-      {
-        path: API_PAGE.Home,
-        children: HomePageChildRoutes,
+        path: '/',
+        element: <Navigate to={API_PAGE.Home} replace/>
       },
       {
-        path: API_PAGE.History,
-        element: <HistoryPage/>
+        path: API_PAGE.Auth,
+        element: <AnonRoute/>,
+        children: WelcomePageChildRoutes,
       },
       {
-        path: API_PAGE.Settings,
-        element: <SettingsPage/>
+        element: <ProtectedRoute/>,
+        children: [
+          {
+            path: API_PAGE.Movies,
+            children: MoviesPageChildRoutes,
+          }
+        ]
       },
       {
-        path: API_PAGE.Assistant,
-        element: <AssistantPage />
+        element: <AppLayoutWithSideNav/>,
+        children: [
+          {
+            path: API_PAGE.Home,
+            children: HomePageChildRoutes,
+          },
+          {
+            path: API_PAGE.History,
+            element: <HistoryPage/>
+          },
+          {
+            path: API_PAGE.Settings,
+            element: <SettingsPage/>
+          },
+          {
+            path: API_PAGE.Assistant,
+            element: <AssistantPage/>
+          }
+        ]
+      },
+      {
+        path: '*',
+        element: <ErrorPage/>,
       }
     ]
   }
