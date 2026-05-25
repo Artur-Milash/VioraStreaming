@@ -6,7 +6,7 @@ import type {MovieSummary} from "../../types/movieTypes.ts";
 import {TrendingMovieCard} from "./components/TrendingMovieCard.tsx";
 import {HistoryMovieCard} from "./components/HistoryMovieCard.tsx";
 import type {History} from "../../types/historyTypes.ts";
-import {NavLink} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import {API_PAGE} from "../../constants/routingConstants.ts";
 import {WeekendSpecial} from "./components/WeekendSpecial.tsx";
 import {SmartRecommender} from "./components/SmartRecommender.tsx";
@@ -80,6 +80,8 @@ function ContinueWatchingSection({histories}: ContinueWatchingProps) {
 type TrendingNowProps = { movies: MovieSummary[] };
 
 function TrendingNowSection({movies}: TrendingNowProps) {
+  const navigate = useNavigate();
+
   return (
       <Stack spacing="24px">
         <Typography variant="h5" sx={{fontWeight: "bold"}}>Trending Now</Typography>
@@ -95,8 +97,12 @@ function TrendingNowSection({movies}: TrendingNowProps) {
             }}
         >
           {movies.map((movie) => (
-              <TrendingMovieCard movie={movie} onClick={() => {
-              }}/>
+              <Box key={movie.id}>
+                <TrendingMovieCard
+                    movie={movie}
+                    onClick={() => navigate(`${API_PAGE.Movies}/${movie.id}`)}
+                />
+              </Box>
           ))}
         </Box>
       </Stack>
