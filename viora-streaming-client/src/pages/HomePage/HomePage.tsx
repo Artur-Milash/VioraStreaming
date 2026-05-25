@@ -97,11 +97,12 @@ function TrendingNowSection({movies}: TrendingNowProps) {
             }}
         >
           {movies.map((movie) => (
-              <TrendingMovieCard
-                  key={movie.id}
-                  movie={movie}
-                  onClick={() => navigate(`${API_PAGE.Movies}/${movie.id}`)}
-              />
+              <Box key={movie.id}>
+                <TrendingMovieCard
+                    movie={movie}
+                    onClick={() => navigate(`${API_PAGE.Movies}/${movie.id}`)}
+                />
+              </Box>
           ))}
         </Box>
       </Stack>
