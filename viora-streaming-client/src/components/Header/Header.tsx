@@ -30,32 +30,38 @@ export function Header() {
               sx={{
                 height: "80px",
                 display: "flex",
-                justifyContent: "space-between",
                 alignItems: "center",
-                position: "relative",
+                justifyContent: "space-between", // Розкидає елементи по краях
               }}
           >
-            <Stack direction="row" spacing="48px">
+            {/* 1. ЛІВА ЧАСТИНА: Логотип + Меню */}
+            {/* flexShrink: 0 гарантує, що меню не буде стискатися і ламатися */}
+            <Stack direction="row" spacing="48px" alignItems="center" sx={{ flexShrink: 0 }}>
               <VioraLogo variant="h4" fontSize="24px"/>
               <HeaderNavigation/>
             </Stack>
 
+            {/* 2. ЦЕНТРАЛЬНА ЧАСТИНА: Розумний контейнер для пошуку */}
             <Box
                 sx={{
-                  position: "absolute",
-                  left: "60%",
-                  transform: "translateX(-50%)",
-                  width: "700px",
-                  display: "flex",
+                  flexGrow: 1, // Дозволяє зайняти весь вільний простір між меню та аватаром
+                  display: { xs: "none", md: "flex" }, // Ховаємо на мобільних
                   justifyContent: "center",
-                  pointerEvents: "none",
-                  "& > *": {pointerEvents: "auto"}
+                  px: 4, // Гарантовані безпечні відступи з обох боків, щоб ніколи не налізти на текст
                 }}
             >
-              <SearchField onSearch={(searchQuery: string) => dispatch(setTitle(searchQuery))}/>
+              {/* Сам пошук, який має максимальні ліміти ширини, щоб не бути надто довгим на 4K */}
+              <Box sx={{
+                width: "100%",
+                maxWidth: { md: "350px", lg: "550px", xl: "700px" },
+                transition: "max-width 0.2s ease"
+              }}>
+                <SearchField onSearch={(searchQuery: string) => dispatch(setTitle(searchQuery))}/>
+              </Box>
             </Box>
 
-            <Stack direction="row">
+            {/* 3. ПРАВА ЧАСТИНА: Аватар */}
+            <Stack direction="row" sx={{ flexShrink: 0 }}>
               <Avatar
                   src={userAvatar}
                   onClick={() => navigate(API_PAGE.Settings)}
