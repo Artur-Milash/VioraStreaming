@@ -52,7 +52,10 @@ export function Header() {
                   "& > *": {pointerEvents: "auto"}
                 }}
             >
-              <SearchField onSearch={(searchQuery: string) => dispatch(setTitle(searchQuery))}/>
+              <SearchField
+                  onSearch={(searchQuery: string) => dispatch(setTitle(searchQuery))}
+                  onEnter={() => navigate(API_PAGE.Movies)}
+              />
             </Box>
 
             <Stack direction="row">
