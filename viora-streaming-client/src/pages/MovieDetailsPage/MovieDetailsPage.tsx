@@ -84,7 +84,6 @@ function MovieDetails({movie, onPlay, onDiscuss}: MovieDetailsProps) {
           <MovieOperators movie={movie}/>
 
           <Stack spacing="16px" direction="row">
-            {/* Play — navigates to the player route */}
             <Button
                 variant="contained"
                 onClick={onPlay}
@@ -123,7 +122,7 @@ function MovieDetails({movie, onPlay, onDiscuss}: MovieDetailsProps) {
   );
 }
 
-// ─── Sub-components (unchanged from your original) ───────────────────────────
+// ─── Sub-components ───────────────────────────────────────────────────────────
 
 type MovieCastProps = { actors: Person[] };
 
@@ -135,7 +134,7 @@ function MovieCast({actors}: MovieCastProps) {
         </Typography>
         <Stack spacing="24px" direction="row">
           {actors.map((actor) => (
-              <ActorCard actor={actor}/>
+              <ActorCard key={actor.id} actor={actor}/>
           ))}
         </Stack>
       </Stack>
@@ -176,13 +175,20 @@ function MovieOperators({movie}: { movie: MovieDetails }) {
   ];
 
   return (
-      <Stack sx={{justifyContent: "space-between"}} direction="row">
+      <Stack
+          direction="row"
+          sx={{
+            flexWrap: "wrap",
+            gap: "24px",
+            alignItems: "flex-start"
+          }}
+      >
         {operators.map((op) => (
-            <Stack key={op.label} spacing="8px">
-              <Typography variant="subtitle1" sx={{color: "text.secondary"}}>
+            <Stack key={op.label} spacing="4px">
+              <Typography variant="subtitle1" sx={{color: "text.secondary", fontSize: "0.875rem"}}>
                 {op.label}
               </Typography>
-              <Typography variant="body1" sx={{fontWeight: "bold"}}>
+              <Typography variant="body1" sx={{fontWeight: "bold", whiteSpace: "nowrap"}}>
                 {op.value}
               </Typography>
             </Stack>

@@ -36,7 +36,14 @@ export function Header() {
           >
             {/* 1. ЛІВА ЧАСТИНА: Логотип + Меню */}
             {/* flexShrink: 0 гарантує, що меню не буде стискатися і ламатися */}
-            <Stack direction="row" spacing="48px" alignItems="center" sx={{ flexShrink: 0 }}>
+            <Stack
+                direction="row"
+                spacing={6}
+                sx={{
+                  flexShrink: 0,
+                  alignItems: "center" // Перенесли сюди
+                }}
+            >
               <VioraLogo variant="h4" fontSize="24px"/>
               <HeaderNavigation/>
             </Stack>
