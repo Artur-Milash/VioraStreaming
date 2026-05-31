@@ -2,6 +2,7 @@ import {Box, Button, Chip, Container, Grid, Stack, Typography} from "@mui/materi
 import type {MoodMovieSuggestion} from "../../../types/movieTypes.ts";
 import {useNavigate} from "react-router-dom";
 import {API_PAGE} from "../../../constants/routingConstants.ts";
+import {ASSISTANT_UI} from "../../../constants/assistantConstants.ts";
 
 type RecommendationSectionProps = {
   suggestions: MoodMovieSuggestion[];
@@ -17,12 +18,12 @@ export function RecommendationSection({suggestions}: RecommendationSectionProps)
             letterSpacing: "2.4px",
             fontWeight: "bold"
           }}>
-            THE NEURAL SELECTION
+            {ASSISTANT_UI.NEURAL_SELECTION_LABEL}
           </Typography>
           <Typography variant="h4" sx={{
             fontWeight: "bold"
           }}>
-            AI Recommendations
+            {ASSISTANT_UI.AI_RECOMMENDATIONS_TITLE}
           </Typography>
         </Stack>
 
@@ -126,7 +127,7 @@ function MostMatchedMovie({suggestion}: { suggestion: MoodMovieSuggestion }) {
               }}
                       onClick={() => navigate(`/${API_PAGE.Movies}/${movie.id}/player`)}
               >
-                Watch Now
+                {ASSISTANT_UI.WATCH_NOW_BUTTON}
               </Button>
               <Button variant="outlined" sx={{
                 borderColor: "rgba(255,255,255,0.1)",
@@ -138,7 +139,7 @@ function MostMatchedMovie({suggestion}: { suggestion: MoodMovieSuggestion }) {
               }}
                       onClick={() => navigate(`${API_PAGE.Movies}/${movie.id}`)}
               >
-                Details
+                {ASSISTANT_UI.DETAILS_BUTTON}
               </Button>
             </Stack>
           </Box>
@@ -268,7 +269,7 @@ function MatchedMovie({suggestion}: { suggestion: MoodMovieSuggestion }) {
                   }}
                   onClick={() => navigate(`${API_PAGE.Movies}/${movie.id}`)}
               >
-                Details
+                {ASSISTANT_UI.DETAILS_BUTTON}
               </Button>
             </Box>
           </Stack>

@@ -4,6 +4,7 @@ import {API_PAGE} from "../../../constants/routingConstants.ts";
 import {useNavigate} from "react-router-dom";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import AddIcon from "@mui/icons-material/Add";
+import {HOME_PAGE_CONSTANTS} from "../../../constants/homePageConstants.ts";
 
 type IntroMovieProps = {
   movie: MovieSummary;
@@ -26,7 +27,7 @@ export function IntroMovie({movie}: IntroMovieProps) {
               color: "primary.main",
               fontWeight: "bold"
             }}>
-              VIORA ORIGINAL
+              {HOME_PAGE_CONSTANTS.VIORA_ORIGINAL_LABEL}
             </Typography>
             <Typography variant="h2" sx={{fontWeight: "bold"}}>
               {movie.title}
@@ -50,7 +51,7 @@ export function IntroMovie({movie}: IntroMovieProps) {
                 }}
             >
               <PlayArrowIcon sx={{mr: 0.5}}/>
-              Play
+              {HOME_PAGE_CONSTANTS.PLAY_BUTTON}
             </Button>
 
             <Button
@@ -64,7 +65,7 @@ export function IntroMovie({movie}: IntroMovieProps) {
                 }}
             >
               <AddIcon/>
-              My List
+              {HOME_PAGE_CONSTANTS.MY_LIST_BUTTON}
             </Button>
           </Stack>
         </Stack>
@@ -82,7 +83,7 @@ function MovieLabels({movie}: MovieLabelProps) {
       <Stack direction="row" spacing="16px" sx={{alignItems: "center"}}>
         <Typography variant="body2"
                     sx={{color: "#CCC3D8"}}>{movie.releaseDate.split('-')[0]}</Typography>
-        <Chip label={"4K ULTRA HD"} size="small" sx={{
+        <Chip label={HOME_PAGE_CONSTANTS.ULTRA_HD_CHIP} size="small" sx={{
           borderRadius: "2px",
           backgroundColor: "text.disabled",
           color: "#CCC3D8"

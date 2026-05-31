@@ -5,6 +5,7 @@ import { DEFAULT_RATING } from "../../../constants/filterConstants.ts";
 import {useDispatch, useSelector} from "react-redux";
 import type {AppDispatch, RootState} from "../../../store/store.ts";
 import {GENRES} from "../../../constants/genres.ts";
+import {MOVIES_PAGE_CONSTANTS} from "../../../constants/moviesPageConstants.ts";
 
 export function ActiveFilters() {
   const dispatch = useDispatch<AppDispatch>();
@@ -27,7 +28,7 @@ export function ActiveFilters() {
   return (
       <Stack direction="row" spacing="12px" sx={{ mb: "40px", alignItems: "center", flexWrap: "wrap" }}>
         <Typography variant="body2" color="text.secondary">
-          Active Filters:
+          {MOVIES_PAGE_CONSTANTS.ACTIVE_FILTERS_LABEL}
         </Typography>
 
         {genres.map((genre) => (
@@ -55,7 +56,7 @@ export function ActiveFilters() {
             sx={{ textTransform: "none", p: 0 }}
             onClick={() => dispatch(resetFilters())}
         >
-          Clear all
+          {MOVIES_PAGE_CONSTANTS.CLEAR_ALL_BUTTON}
         </Button>
       </Stack>
   );

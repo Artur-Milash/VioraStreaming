@@ -1,5 +1,6 @@
 import {Box, Button, Stack, Typography} from "@mui/material";
 import SmartToyOutlinedIcon from '@mui/icons-material/SmartToyOutlined';
+import {MOVIE_DETAILS_PAGE_CONSTANTS} from "../../../constants/movieDetailsPageConstants.ts";
 
 type MovieAssistantEnablerProps = {
   content: string;
@@ -28,7 +29,7 @@ export function MovieAssistantEnabler({content, onButtonClick}: MovieAssistantEn
             <SmartToyOutlinedIcon fontSize="small"/>
           </Box>
           <Typography variant="body1" sx={{fontWeight: "bold"}}>
-            Movie Assistant
+            {MOVIE_DETAILS_PAGE_CONSTANTS.ASSISTANT_TITLE}
           </Typography>
         </Stack>
 
@@ -44,7 +45,7 @@ export function MovieAssistantEnabler({content, onButtonClick}: MovieAssistantEn
           fontWeight: "bold",
           borderRadius: "8px",
         }} onClick={onButtonClick}>
-          Discuss with AI
+          {MOVIE_DETAILS_PAGE_CONSTANTS.DISCUSS_BUTTON}
         </Button>
 
       </Stack>

@@ -1,5 +1,6 @@
 import {Stack, Typography} from "@mui/material";
 import GroupsIcon from '@mui/icons-material/Groups';
+import {HOME_PAGE_CONSTANTS} from "../../../constants/homePageConstants.ts";
 
 export function JoinTheCommunity() {
   return (
@@ -14,11 +15,11 @@ export function JoinTheCommunity() {
       }}>
 
         <Typography variant="h4" sx={{color: "white", fontWeight: "bolder"}}>
-          Join the community
+          {HOME_PAGE_CONSTANTS.JOIN_COMMUNITY_TITLE}
         </Typography>
 
         <Typography variant="body1" sx={{fontWeight: "bold", maxWidth: "190px"}}>
-          Connect with millions of Viora viewers and share your lists
+          {HOME_PAGE_CONSTANTS.JOIN_COMMUNITY_SUBTITLE}
         </Typography>
 
         <Stack direction="row" sx={{justifyContent: "end"}}>

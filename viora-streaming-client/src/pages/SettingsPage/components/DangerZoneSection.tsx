@@ -1,5 +1,5 @@
 import {Box, Button, Container, Stack, Typography} from "@mui/material";
-import {DANGER_ZONE_DESCRIPTION} from "../../../constants/settingsConstants.ts";
+import {DANGER_ZONE_DESCRIPTION, SETTINGS_UI} from "../../../constants/settingsConstants.ts";
 
 type DangerZoneSectionProps = {
   onClick: () => void;
@@ -18,7 +18,7 @@ export function DangerZoneSection({onClick}: DangerZoneSectionProps) {
             <Typography variant="h6" sx={{
               color: "error.main",
               fontWeight: "bold",
-            }}>Danger Zone</Typography>
+            }}>{SETTINGS_UI.DANGER_ZONE_TITLE}</Typography>
             <Typography variant="body2" sx={{color: "#CCC3D8"}} className="">
               {DANGER_ZONE_DESCRIPTION}
             </Typography>
@@ -28,7 +28,7 @@ export function DangerZoneSection({onClick}: DangerZoneSectionProps) {
             fontWeight: "bold",
             borderRadius: "12px",
           }} onClick={onClick}>
-            Delete My Account
+            {SETTINGS_UI.DELETE_ACCOUNT_BUTTON}
           </Button>
         </Stack>
       </Container>
