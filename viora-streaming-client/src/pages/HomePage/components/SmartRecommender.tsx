@@ -1,5 +1,6 @@
 import {Box, Stack, Typography} from "@mui/material";
 import AutoAwesomeOutlinedIcon from "@mui/icons-material/AutoAwesomeOutlined";
+import {HOME_PAGE_CONSTANTS} from "../../../constants/homePageConstants.ts";
 
 type SmartRecommenderProps = {
   onClick?: () => void;
@@ -27,12 +28,12 @@ export function SmartRecommender({onClick}: SmartRecommenderProps) {
             <Typography variant="h6" sx={{
               fontWeight: "bold",
               textAlign: "center",
-            }}>Smart Recommender</Typography>
+            }}>{HOME_PAGE_CONSTANTS.SMART_RECOMMENDER_TITLE}</Typography>
             <Typography variant="body2" sx={{
               color: "text.secondary",
               textAlign: "center",
             }}>
-              Personalized based on your view habits
+              {HOME_PAGE_CONSTANTS.SMART_RECOMMENDER_SUBTITLE}
             </Typography>
             </Stack>
           </Stack>

@@ -5,6 +5,7 @@ import {useTrendingMovies} from "../../../hooks/useMovies.ts";
 import {useDispatch} from "react-redux";
 import type {AppDispatch} from "../../../store/store.ts";
 import {resetFilters} from "../../../store/filterSlice.ts";
+import {MOVIES_PAGE_CONSTANTS} from "../../../constants/moviesPageConstants.ts";
 
 export function TrendingMovies() {
 
@@ -26,7 +27,7 @@ export function TrendingMovies() {
           <Box
               component="img"
               src={NoMoviesImg}
-              alt="No movies match found"
+              alt={MOVIES_PAGE_CONSTANTS.NO_MOVIES_ALT}
               sx={{
                 width: "96px",
                 height: "auto",
@@ -35,12 +36,11 @@ export function TrendingMovies() {
               }}
           />
           <Typography variant="h4" sx={{fontWeight: 800, fontSize: "36px"}}>
-            No movies match
+            {MOVIES_PAGE_CONSTANTS.NO_MOVIES_TITLE}
           </Typography>
           <Typography variant="body1" color="text.secondary"
                       sx={{maxWidth: "500px", fontSize: "16px", paddingBottom: "40px"}}>
-            We couldn't find any titles that match your current selection. Try broadening your
-            criteria or resetting your search.
+            {MOVIES_PAGE_CONSTANTS.NO_MOVIES_DESCRIPTION}
           </Typography>
           <Button
               variant="contained"
@@ -53,12 +53,12 @@ export function TrendingMovies() {
               }}
               onClick={() => dispatch(resetFilters())}
           >
-            Clear all filters
+            {MOVIES_PAGE_CONSTANTS.CLEAR_ALL_FILTERS_BUTTON}
           </Button>
         </Stack>
 
         <Typography variant="h6" sx={{fontWeight: 700, mb: "24px"}}>
-          Trending instead
+          {MOVIES_PAGE_CONSTANTS.TRENDING_INSTEAD_TITLE}
         </Typography>
         <Movies movies={movies}/>
 
@@ -66,10 +66,10 @@ export function TrendingMovies() {
         <Box ref={loaderRef} sx={{py: "32px", display: "flex", justifyContent: "center"}}>
           {isLoading && <CircularProgress size={28}/>}
           {isError && (
-              <Typography color="error">Failed to load movies. Please try again.</Typography>
+              <Typography color="error">{MOVIES_PAGE_CONSTANTS.LOAD_ERROR}</Typography>
           )}
           {!hasMore && !isLoading && (
-              <Typography color="text.secondary">You've reached the end</Typography>
+              <Typography color="text.secondary">{MOVIES_PAGE_CONSTANTS.END_OF_LIST}</Typography>
           )}
         </Box>
       </>

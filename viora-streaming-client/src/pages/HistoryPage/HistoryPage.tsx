@@ -4,6 +4,7 @@ import {useNavigate} from "react-router";
 import {API_PAGE} from "../../constants/routingConstants.ts";
 import {EmptyHistoryPage} from "./components/EmptyHistoryPage.tsx";
 import {getProgressInfo} from "../../utils/historyHelpers.ts";
+import {HISTORY_PAGE_CONSTANTS} from "../../constants/historyPageConstants.ts";
 
 
 export function HistoryPage() {
@@ -28,10 +29,10 @@ export function HistoryPage() {
       <Stack sx={{p: "50px 32px"}} spacing="32px">
         <Box>
           <Typography variant="h3" sx={{fontWeight: "bold"}}>
-            Watch History
+            {HISTORY_PAGE_CONSTANTS.PAGE_TITLE}
           </Typography>
           <Typography variant="body1" sx={{fontWeight: "bold", color: "#CCC3D8"}}>
-            Pick up where you left off
+            {HISTORY_PAGE_CONSTANTS.PAGE_SUBTITLE}
           </Typography>
         </Box>
 
@@ -103,7 +104,7 @@ export function HistoryPage() {
                             textTransform: "none",
                           }}
                       >
-                        {finished ? "Watch Again" : "Resume"}
+                        {finished ? HISTORY_PAGE_CONSTANTS.WATCH_AGAIN_BUTTON : HISTORY_PAGE_CONSTANTS.RESUME_BUTTON}
                       </Button>
                     </Stack>
 

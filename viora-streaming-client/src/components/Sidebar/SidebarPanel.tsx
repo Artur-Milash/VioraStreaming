@@ -6,13 +6,14 @@ import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlin
 import AutoAwesomeOutlinedIcon from "@mui/icons-material/AutoAwesomeOutlined";
 import SettingsIcon from '@mui/icons-material/Settings';
 import {NavLink} from "react-router-dom";
+import {NAVIGATION_CONSTANTS} from "../../constants/navigationConstants.ts";
 
 const sidebarItems = [
-  {name: "Home", path: API_PAGE.Home, icon: HomeFilledIcon},
-  {name: "Movies", path: API_PAGE.Movies, icon: MovieCreationOutlinedIcon},
-  {name: "History", path: API_PAGE.History, icon: BookmarkBorderOutlinedIcon},
-  {name: "Settings", path: API_PAGE.Settings, icon: SettingsIcon},
-  {name: "AI Assistant", path: API_PAGE.Assistant, icon: AutoAwesomeOutlinedIcon},
+  {name: NAVIGATION_CONSTANTS.HOME, path: API_PAGE.Home, icon: HomeFilledIcon},
+  {name: NAVIGATION_CONSTANTS.MOVIES, path: API_PAGE.Movies, icon: MovieCreationOutlinedIcon},
+  {name: NAVIGATION_CONSTANTS.HISTORY, path: API_PAGE.History, icon: BookmarkBorderOutlinedIcon},
+  {name: NAVIGATION_CONSTANTS.SETTINGS, path: API_PAGE.Settings, icon: SettingsIcon},
+  {name: NAVIGATION_CONSTANTS.AI_ASSISTANT, path: API_PAGE.Assistant, icon: AutoAwesomeOutlinedIcon},
 ];
 
 export function SidebarPanel() {

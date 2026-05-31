@@ -1,5 +1,6 @@
 import {Box, InputBase} from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import {NAVIGATION_CONSTANTS} from "../../../constants/navigationConstants.ts";
 
 export type SearchFieldProps = {
   onSearch: (query: string) => void;
@@ -21,7 +22,7 @@ export function SearchField({onSearch}: SearchFieldProps) {
       >
         <SearchIcon sx={{color: "text.secondary", mr: "12px"}}/>
         <InputBase
-            placeholder="Search movies, genres..."
+            placeholder={NAVIGATION_CONSTANTS.SEARCH_PLACEHOLDER}
             fullWidth
             sx={{
               color: "text.primary",

@@ -3,6 +3,7 @@ import {useInfiniteMovies} from "../../../hooks/useMovies.ts";
 import {ActiveFilters} from "./ActiveFilters.tsx";
 import {Movies} from "./Movies.tsx";
 import {TrendingMovies} from "./TrendingMovies.tsx";
+import {MOVIES_PAGE_CONSTANTS} from "../../../constants/moviesPageConstants.ts";
 
 export function MovieContent() {
   const {movies, isLoading, isError, hasMore, loaderRef} = useInfiniteMovies();
@@ -24,10 +25,10 @@ export function MovieContent() {
         <Box ref={loaderRef} sx={{py: "32px", display: "flex", justifyContent: "center"}}>
           {isLoading && movies.length > 0 && <CircularProgress size={28}/>}
           {isError && (
-              <Typography color="error">Failed to load movies. Please try again.</Typography>
+              <Typography color="error">{MOVIES_PAGE_CONSTANTS.LOAD_ERROR}</Typography>
           )}
           {!hasMore && !isLoading && (
-              <Typography color="text.secondary">You've reached the end</Typography>
+              <Typography color="text.secondary">{MOVIES_PAGE_CONSTANTS.END_OF_LIST}</Typography>
           )}
         </Box>
 
