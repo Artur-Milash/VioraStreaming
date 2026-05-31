@@ -1,4 +1,4 @@
-package org.viora.viorastreamingcore.movie.controller.impl;
+package org.viora.viorastreamingcore.content.controller.impl;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
