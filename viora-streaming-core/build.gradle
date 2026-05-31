@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.5.13'
     id 'io.spring.dependency-management' version '1.1.7'
+    id 'jacoco'
 }
 ext {
     springCloudVersion = "2025.0.2"
@@ -18,8 +19,13 @@ java {
     }
 }
 
+jacoco {
+    toolVersion = "0.8.12"
+}
+
 test {
     useJUnitPlatform()
+    finalizedBy jacocoTestReport
 
     testLogging {
         events "passed", "failed", "skipped"
@@ -27,6 +33,20 @@ test {
         exceptionFormat = "full"
     }
 }
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                counter = 'LINE'
+                value = 'COVEREDRATIO'
+                minimum = 0.80
+            }
+        }
+    }
+}
+
+check.dependsOn jacocoTestCoverageVerification
 
 repositories {
     mavenCentral()
