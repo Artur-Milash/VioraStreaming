@@ -32,6 +32,8 @@ test {
         showStandardStreams = true
         exceptionFormat = "full"
     }
+
+    systemProperty "user.timezone", "Europe/Kyiv"
 }
 
 jacocoTestCoverageVerification {
