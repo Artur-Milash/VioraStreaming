@@ -6,4 +6,6 @@ public interface SaveHistoryUseCase {
 
   void saveHistory(SaveHistoryCommand command);
 
+  void saveHistory(Long movieId);
+
 }

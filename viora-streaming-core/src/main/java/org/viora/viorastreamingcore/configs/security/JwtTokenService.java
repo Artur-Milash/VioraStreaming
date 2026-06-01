@@ -45,30 +45,6 @@ public class JwtTokenService {
     }
   }
 
-  public String generateDropPasswordToken(UserDetails userDetails) {
-    Instant now = Instant.now();
-    JwtClaimsSet claims = JwtClaimsSet.builder()
-        .issuer("self")
-        .issuedAt(now)
-        .expiresAt(now.plus(15, ChronoUnit.MINUTES))
-        .subject(userDetails.getUsername())
-        .claim("purpose", "drop-password")
-        .build();
-    var encoderParameters = JwtEncoderParameters.from(
-        JwsHeader.with(MacAlgorithm.HS256).build(), claims
-    );
-    return this.encoder.encode(encoderParameters).getTokenValue();
-  }
-
-  public String getUsernameFromDropPasswordToken(String token) {
-    Jwt jwt = decoder.decode(token);
-    String purpose = jwt.getClaimAsString("purpose");
-    if (!"drop-password".equals(purpose)) {
-      throw new IllegalArgumentException("Invalid token purpose");
-    }
-    return jwt.getSubject();
-  }
-
   public String getUsernameFromToken(String token) {
     return decoder.decode(token).getSubject();
   }

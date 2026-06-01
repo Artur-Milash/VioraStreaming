@@ -1,6 +1,7 @@
 import {useState} from "react";
 import {useParams, useNavigate} from "react-router";
 import {useMovie} from "../../hooks/useMovie.ts";
+import {useSaveToHistory} from "../../hooks/useHistory.ts";
 import {Box, Button, Chip, CircularProgress, Stack, Typography} from "@mui/material";
 import type {MovieDetails, Person} from "../../types/movieTypes.ts";
 import AddIcon from "@mui/icons-material/Add";
@@ -14,6 +15,7 @@ export function MovieDetailsPage() {
   const {id} = useParams<{ id: string }>();
   const navigate = useNavigate();
   const {movie, isLoading} = useMovie(Number(id));
+  const {saveToHistory, isPending: isSaving} = useSaveToHistory();
   const [discussionOpen, setDiscussionOpen] = useState(false);
 
   if (isLoading || !movie) {
@@ -32,7 +34,13 @@ export function MovieDetailsPage() {
       <Box sx={{display: "flex", minHeight: "100%"}}>
         <Box sx={{flex: 1, py: "50px", px: "48px", minWidth: 0}}>
           <Stack spacing="64px" sx={{maxWidth: "1280px", margin: "0 auto"}}>
-            <MovieDetails movie={movie} onPlay={handlePlay} onDiscuss={() => setDiscussionOpen(true)}/>
+            <MovieDetails
+              movie={movie}
+              onPlay={handlePlay}
+              onDiscuss={() => setDiscussionOpen(true)}
+              onAddToList={() => saveToHistory(movie.id)}
+              isSaving={isSaving}
+          />
             <MovieCast actors={movie?.actors ?? []}/>
           </Stack>
         </Box>
@@ -51,9 +59,11 @@ type MovieDetailsProps = {
   movie: MovieDetails;
   onPlay: () => void;
   onDiscuss: () => void;
+  onAddToList: () => void;
+  isSaving: boolean;
 };
 
-function MovieDetails({movie, onPlay, onDiscuss}: MovieDetailsProps) {
+function MovieDetails({movie, onPlay, onDiscuss, onAddToList, isSaving}: MovieDetailsProps) {
   return (
       <Stack
           spacing="48px"
@@ -102,6 +112,8 @@ function MovieDetails({movie, onPlay, onDiscuss}: MovieDetailsProps) {
 
             <Button
                 variant="outlined"
+                onClick={onAddToList}
+                disabled={isSaving}
                 sx={{
                   textTransform: "none",
                   fontWeight: "bold",

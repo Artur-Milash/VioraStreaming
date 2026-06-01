@@ -10,6 +10,7 @@ import {store} from "./store/store.ts";
 import {QueryClientProvider} from "@tanstack/react-query";
 import {queryClient} from "./queryClient.ts";
 import ModalContainer from "./components/Modals/ModalContainer.tsx";
+import {Toast} from "./components/Toast/Toast.tsx";
 
 
 const router = createBrowserRouter(routes);
@@ -24,6 +25,7 @@ export function App() {
               <QueryClientProvider client={queryClient}>
                 <AppLoader router={router}/>
                 <ModalContainer/>
+                <Toast/>
               </QueryClientProvider>
             </Provider>
           </ThemeProvider>

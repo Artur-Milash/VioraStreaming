@@ -1,6 +1,7 @@
-import { useQuery } from "@tanstack/react-query";
-import { getHistoryByMovie, getUserHistories } from "../api/historyApi.ts";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { getHistoryByMovie, getUserHistories, saveMovieToHistory } from "../api/historyApi.ts";
 import type { History } from "../types/historyTypes.ts";
+import { useToast } from "./useToast.ts";
 
 export const historyKeys = {
   all: ["history"] as const,
@@ -23,4 +24,19 @@ export const useHistoryByMovie = (movieId: number) => {
   });
 
   return { history: history as History | null, isLoading };
+};
+
+export const useSaveToHistory = () => {
+  const queryClient = useQueryClient();
+  const toast = useToast();
+
+  const { mutate: saveToHistory, isPending } = useMutation({
+    mutationFn: (movieId: number) => saveMovieToHistory(movieId),
+    onSuccess() {
+      queryClient.invalidateQueries({ queryKey: historyKeys.all });
+      toast("Added to My List");
+    },
+  });
+
+  return { saveToHistory, isPending };
 };
