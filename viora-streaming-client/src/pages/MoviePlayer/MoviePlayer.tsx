@@ -8,10 +8,9 @@ export function MoviePlayer() {
   const {id} = useParams<{ id: string }>();
   const navigate = useNavigate();
 
-  // useParams always returns string | undefined — parse to number for usePlayer
-  const {imdbId, title, isLoading, history} = usePlayer(Number(id));
+  const {title, isLoading, history, videoUrl} = usePlayer(Number(id));
 
-  if (isLoading || !imdbId) {
+  if (isLoading) {
     return (
         <Box
             sx={{
@@ -29,14 +28,19 @@ export function MoviePlayer() {
     );
   }
 
+  if (!videoUrl) {
+    navigate('/error');
+    return null;
+  }
+
   return (
       <Player
-          movieId={imdbId}
+          videoUrl={videoUrl}
           dbMovieId={Number(id)}
-          apiBaseUrl={API_BASE}
           title={title}
           onClose={() => navigate(-1)}
           startFrom={history?.lastWatchedAt}
+          apiBaseUrl={API_BASE}
       />
   );
 }

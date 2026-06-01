@@ -25,7 +25,8 @@ export function MovieDetailsPage() {
   }
 
   const handlePlay = () => {
-    navigate(`/${API_PAGE.Movies}/${id}/player`);
+    if (movie.videoUrl) navigate(`/${API_PAGE.Movies}/${id}/player`);
+    else navigate(API_PAGE.Error);
   };
 
   return (
@@ -89,6 +90,7 @@ function MovieDetails({movie, onPlay, onDiscuss}: MovieDetailsProps) {
             <Button
                 variant="contained"
                 onClick={onPlay}
+                disabled={!movie.videoUrl}
                 sx={{
                   textTransform: "none",
                   fontWeight: "bold",

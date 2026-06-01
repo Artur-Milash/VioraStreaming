@@ -72,6 +72,7 @@ public class MovieServiceImpl implements MovieService {
         .title(m.getTitle())
         .poster(m.getPoster())
         .releaseDate(m.getReleaseDate())
+        .videoUrl(m.getVideoUrl())
         .genres(m.getGenres().stream().map(genre -> new GenreDto(genre.getId(), genre.getName()))
             .collect(Collectors.toSet()))
         .rating(m.getRating())

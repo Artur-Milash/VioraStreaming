@@ -13,7 +13,8 @@ type IntroMovieProps = {
 export function IntroMovie({movie}: IntroMovieProps) {
   const navigate = useNavigate();
   const handlePlay = () => {
-    navigate(`/${API_PAGE.Movies}/${movie.id}/player`);
+    if (movie.videoUrl) navigate(`/${API_PAGE.Movies}/${movie.id}/player`);
+    else navigate(API_PAGE.Error);
   };
   return (
       <Box sx={{
@@ -43,6 +44,7 @@ export function IntroMovie({movie}: IntroMovieProps) {
             <Button
                 variant="contained"
                 onClick={handlePlay}
+                disabled={!movie.videoUrl}
                 sx={{
                   textTransform: "none",
                   fontWeight: "bold",

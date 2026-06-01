@@ -8,6 +8,7 @@ export interface MovieSummary {
   title: string;
   poster: string;
   releaseDate: string;
+  videoUrl?: string;
   genres: Genre[];
   rating: number;
   durationInMinutes: number;
