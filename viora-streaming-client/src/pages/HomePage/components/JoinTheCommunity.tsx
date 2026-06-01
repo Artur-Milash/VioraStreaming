@@ -9,18 +9,14 @@ export function JoinTheCommunity() {
         borderRadius: "12px",
         minHeight: "400px",
         width: "100%",
-        cursor: "pointer",
         justifyContent: "space-between",
       }}>
-
         <Typography variant="h4" sx={{color: "white", fontWeight: "bolder"}}>
           Join the community
         </Typography>
-
         <Typography variant="body1" sx={{fontWeight: "bold", maxWidth: "190px"}}>
           Connect with millions of Viora viewers and share your lists
         </Typography>
-
         <Stack direction="row" sx={{justifyContent: "end"}}>
           <GroupsIcon fontSize="large" />
         </Stack>

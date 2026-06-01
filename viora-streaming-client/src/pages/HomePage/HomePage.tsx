@@ -112,16 +112,23 @@ function TrendingNowSection({movies}: TrendingNowProps) {
 type CuratedForYouProps = { movie: MovieSummary };
 
 function CuratedForYou({movie}: CuratedForYouProps) {
+  const navigate = useNavigate();
+
   return (
       <Stack spacing="24px">
         <Typography variant="h6" sx={{fontWeight: "bold"}}>Curated For You</Typography>
 
         <Grid container spacing={3}>
           <Grid size={6}>
-            <WeekendSpecial movie={movie}/>
+            <WeekendSpecial
+                movie={movie}
+                onClick={() => navigate(`${API_PAGE.Movies}/${movie.id}`)}
+            />
           </Grid>
           <Grid size={3}>
-            <SmartRecommender/>
+            <SmartRecommender
+                onClick={() => navigate(API_PAGE.Assistant)}
+            />
           </Grid>
           <Grid size={3}>
             <JoinTheCommunity/>
