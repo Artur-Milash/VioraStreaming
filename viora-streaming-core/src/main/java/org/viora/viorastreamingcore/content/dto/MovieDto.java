@@ -7,7 +7,6 @@ public record MovieDto(
     Long id,
     String title,
     String plot,
-    String synopsis,
     String poster,
     String rated,
     Float rating,

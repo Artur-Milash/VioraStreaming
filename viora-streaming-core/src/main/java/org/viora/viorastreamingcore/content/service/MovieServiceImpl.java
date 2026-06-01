@@ -14,7 +14,6 @@ import org.viora.viorastreamingcore.content.dto.MovieDto;
 import org.viora.viorastreamingcore.content.dto.MovieFilter;
 import org.viora.viorastreamingcore.content.dto.MovieSummary;
 import org.viora.viorastreamingcore.content.exception.MovieNotFoundException;
-import org.viora.viorastreamingcore.content.model.Genre;
 import org.viora.viorastreamingcore.content.model.Movie;
 import org.viora.viorastreamingcore.content.repository.MovieRepository;
 
