@@ -10,18 +10,14 @@ export function JoinTheCommunity() {
         borderRadius: "12px",
         minHeight: "400px",
         width: "100%",
-        cursor: "pointer",
         justifyContent: "space-between",
       }}>
-
         <Typography variant="h4" sx={{color: "white", fontWeight: "bolder"}}>
           {HOME_PAGE_CONSTANTS.JOIN_COMMUNITY_TITLE}
         </Typography>
-
         <Typography variant="body1" sx={{fontWeight: "bold", maxWidth: "190px"}}>
           {HOME_PAGE_CONSTANTS.JOIN_COMMUNITY_SUBTITLE}
         </Typography>
-
         <Stack direction="row" sx={{justifyContent: "end"}}>
           <GroupsIcon fontSize="large" />
         </Stack>

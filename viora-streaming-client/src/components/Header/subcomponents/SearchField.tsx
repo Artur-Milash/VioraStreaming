@@ -1,12 +1,16 @@
-import {Box, InputBase} from "@mui/material";
+import {Box, InputBase, IconButton} from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import {useRef} from "react";
 import {NAVIGATION_CONSTANTS} from "../../../constants/navigationConstants.ts";
 
 export type SearchFieldProps = {
   onSearch: (query: string) => void;
+  onEnter: (query: string) => void;
 };
 
-export function SearchField({onSearch}: SearchFieldProps) {
+export function SearchField({onSearch, onEnter}: SearchFieldProps) {
+  const inputRef = useRef<HTMLInputElement>(null);
+
   return (
       <Box
           sx={{
@@ -20,8 +24,8 @@ export function SearchField({onSearch}: SearchFieldProps) {
             maxWidth: "700px",
           }}
       >
-        <SearchIcon sx={{color: "text.secondary", mr: "12px"}}/>
         <InputBase
+            inputRef={inputRef}
             placeholder={NAVIGATION_CONSTANTS.SEARCH_PLACEHOLDER}
             fullWidth
             sx={{
@@ -33,7 +37,22 @@ export function SearchField({onSearch}: SearchFieldProps) {
               },
             }}
             onChange={(e) => onSearch(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                onEnter((e.target as HTMLInputElement).value);
+              }
+            }}
         />
+        <IconButton
+            onClick={() => {
+              if (inputRef.current) {
+                onEnter(inputRef.current.value);
+              }
+            }}
+            sx={{color: "text.secondary", p: "4px"}}
+        >
+          <SearchIcon/>
+        </IconButton>
       </Box>
   );
 }
