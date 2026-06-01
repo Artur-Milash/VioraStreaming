@@ -5,6 +5,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import {CustomField} from "../../../components/Field/CustomField.tsx";
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
+import {AUTH_CONSTANTS} from "../../../constants/authConstants.ts";
 
 type ForgotPasswordFormProps = {
   onSubmit: (email: string) => void;
@@ -29,7 +30,7 @@ export function ForgotPasswordForm({onSubmit}: ForgotPasswordFormProps) {
           cursor: "pointer"
         }} spacing="10px" onClick={() => navigate(-1)}>
           <KeyboardBackspaceIcon/>
-          <Link underline="none" sx={{fontWeight: "bold"}}>Back to Login</Link>
+          <Link underline="none" sx={{fontWeight: "bold"}}>{AUTH_CONSTANTS.FORGOT_PASSWORD_BACK_LINK}</Link>
         </Stack>
         <Container>
           <Stack direction="row" sx={{justifyContent: "center", width: "100%", pb: "24px"}}>
@@ -37,17 +38,17 @@ export function ForgotPasswordForm({onSubmit}: ForgotPasswordFormProps) {
           </Stack>
           <Stack spacing="12px" sx={{pb: "40px"}}>
             <Typography variant="h5" align="center" sx={{fontWeight: 700}}>
-              Forgot your Password
+              {AUTH_CONSTANTS.FORGOT_PASSWORD_TITLE}
             </Typography>
             <Typography variant="body1" align="center" sx={{color: "#CCC3D8"}}>
-              No worries, we'll send you reset instructions.
+              {AUTH_CONSTANTS.FORGOT_PASSWORD_SUBTITLE}
             </Typography>
           </Stack>
 
           <Stack spacing="24px">
             <CustomField
-                label={"Email"}
-                placeholder={"name@company.com"}
+                label={AUTH_CONSTANTS.EMAIL_LABEL}
+                placeholder={AUTH_CONSTANTS.EMAIL_PLACEHOLDER}
                 type="email"
                 fullWidth
                 value={email}
@@ -59,7 +60,7 @@ export function ForgotPasswordForm({onSubmit}: ForgotPasswordFormProps) {
                 onClick={handleSubmit}
                 disabled={!email.trim()}
             >
-              Send Reset Link
+              {AUTH_CONSTANTS.SEND_RESET_LINK_BUTTON}
             </Button>
           </Stack>
         </Container>

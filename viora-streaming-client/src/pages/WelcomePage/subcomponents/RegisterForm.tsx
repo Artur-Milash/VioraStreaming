@@ -4,6 +4,7 @@ import {Controller, useForm} from "react-hook-form";
 import {CustomField} from "../../../components/Field/CustomField.tsx";
 import {VioraButton} from "../../../components/Button/VioraButton.tsx";
 import {RulesLinearProgress} from "../../../components/LinearProgress/RulesLinearProgress.tsx";
+import {AUTH_CONSTANTS} from "../../../constants/authConstants.ts";
 
 type FormData = {
   email: string;
@@ -26,10 +27,10 @@ export function RegisterForm({onSubmit, isLoading, error, onSignIn}: RegisterFor
         <Stack spacing={"32px"}>
           <Stack spacing={"5px"}>
             <Typography variant="h5" align="center" sx={{fontWeight: 700}}>
-              Create your account
+              {AUTH_CONSTANTS.REGISTER_TITLE}
             </Typography>
             <Typography variant="body2" color={"text.secondary"} align="center">
-              Join the premium streaming experience
+              {AUTH_CONSTANTS.REGISTER_SUBTITLE}
             </Typography>
           </Stack>
 
@@ -51,13 +52,13 @@ export function RegisterForm({onSubmit, isLoading, error, onSignIn}: RegisterFor
                   control={control}
                   defaultValue=""
                   rules={{
-                    required: "Email is required"
+                    required: AUTH_CONSTANTS.EMAIL_REQUIRED
                   }}
                   render={({field, fieldState}) => (
                       <CustomField
                           {...field}
-                          label="Email"
-                          placeholder="name@company.com"
+                          label={AUTH_CONSTANTS.EMAIL_LABEL}
+                          placeholder={AUTH_CONSTANTS.EMAIL_PLACEHOLDER}
                           type='email'
                           error={fieldState.error}
                       />
@@ -69,8 +70,8 @@ export function RegisterForm({onSubmit, isLoading, error, onSignIn}: RegisterFor
                   control={control}
                   defaultValue=""
                   rules={{
-                    required: "Password is required",
-                    validate: (value: string) => value.length >= 8 || "Password must be at least 8 characters"
+                    required: AUTH_CONSTANTS.PASSWORD_REQUIRED,
+                    validate: (value: string) => value.length >= 8 || AUTH_CONSTANTS.PASSWORD_MIN_LENGTH_ERROR
                   }}
                   render={({field, fieldState}) => (
                       <Stack spacing={"10px"} sx={{
@@ -80,13 +81,13 @@ export function RegisterForm({onSubmit, isLoading, error, onSignIn}: RegisterFor
                             {...field}
                             fullWidth
                             type="password"
-                            label="Password"
+                            label={AUTH_CONSTANTS.PASSWORD_LABEL}
                             error={fieldState.error}
                         />
                         <RulesLinearProgress
                             rules={4}
                             fullFilled={field.value.length / 2}
-                            message={fieldState.error && "Must be at least 8 characters"}/>
+                            message={fieldState.error && AUTH_CONSTANTS.PASSWORD_MIN_LENGTH_HINT}/>
                       </Stack>
                   )}
               />
@@ -96,21 +97,21 @@ export function RegisterForm({onSubmit, isLoading, error, onSignIn}: RegisterFor
                   control={control}
                   defaultValue=""
                   rules={{
-                    required: "Please confirm your password",
-                    validate: (value: string) => value ===  getValues("password") || "Passwords do not match"
+                    required: AUTH_CONSTANTS.CONFIRM_PASSWORD_REQUIRED,
+                    validate: (value: string) => value ===  getValues("password") || AUTH_CONSTANTS.PASSWORDS_MISMATCH
                   }}
                   render={({field, fieldState}) => (
                       <CustomField
                           {...field}
                           fullWidth
                           type="password"
-                          label="Confirm Password"
+                          label={AUTH_CONSTANTS.CONFIRM_PASSWORD_LABEL}
                           error={fieldState.error}
                       />
                   )}
               />
 
-              <VioraButton name="Create Account" loading={isLoading}/>
+              <VioraButton name={AUTH_CONSTANTS.CREATE_ACCOUNT_BUTTON} loading={isLoading}/>
             </Stack>
           </form>
         </Stack>
@@ -121,7 +122,7 @@ export function RegisterForm({onSubmit, isLoading, error, onSignIn}: RegisterFor
               padding: "0 16px",
               backgroundColor: "#201F21"
             }}>
-              <Typography variant="body2">OR</Typography>
+              <Typography variant="body2">{AUTH_CONSTANTS.OR_DIVIDER}</Typography>
             </Box>
           </Divider>
 
@@ -130,13 +131,13 @@ export function RegisterForm({onSubmit, isLoading, error, onSignIn}: RegisterFor
             alignItems: "center",
           }}>
             <Typography variant="body2" color={"textDisabled"}>
-              Already have an account?
+              {AUTH_CONSTANTS.ALREADY_HAVE_ACCOUNT_TEXT}
             </Typography>
             <Link component="button"
                   color="primary"
                   underline={"none"}
                   onClick={onSignIn}>
-              Sign in
+              {AUTH_CONSTANTS.SIGN_IN_LINK}
             </Link>
           </Stack>
         </Stack>

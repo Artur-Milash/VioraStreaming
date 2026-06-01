@@ -11,6 +11,7 @@ import {API_PAGE} from "../../constants/routingConstants.ts";
 import {WeekendSpecial} from "./components/WeekendSpecial.tsx";
 import {SmartRecommender} from "./components/SmartRecommender.tsx";
 import {JoinTheCommunity} from "./components/JoinTheCommunity.tsx";
+import {HOME_PAGE_CONSTANTS} from "../../constants/homePageConstants.ts";
 
 export default function HomePage() {
   const {movies, isLoading} = useTrendingMovies();
@@ -43,9 +44,9 @@ function ContinueWatchingSection({histories}: ContinueWatchingProps) {
   return (
       <Stack spacing="24px">
         <Stack direction="row" sx={{justifyContent: "space-between", alignItems: "center"}}>
-          <Typography variant="h5" sx={{fontWeight: "bold"}}>Continue Watching</Typography>
+          <Typography variant="h5" sx={{fontWeight: "bold"}}>{HOME_PAGE_CONSTANTS.CONTINUE_WATCHING_TITLE}</Typography>
           <Link component={NavLink} to={API_PAGE.History} underline="none">
-            View All
+            {HOME_PAGE_CONSTANTS.VIEW_ALL_LINK}
           </Link>
         </Stack>
 
@@ -84,7 +85,7 @@ function TrendingNowSection({movies}: TrendingNowProps) {
 
   return (
       <Stack spacing="24px">
-        <Typography variant="h5" sx={{fontWeight: "bold"}}>Trending Now</Typography>
+        <Typography variant="h5" sx={{fontWeight: "bold"}}>{HOME_PAGE_CONSTANTS.TRENDING_NOW_TITLE}</Typography>
 
         <Box
             sx={{
@@ -116,7 +117,7 @@ function CuratedForYou({movie}: CuratedForYouProps) {
 
   return (
       <Stack spacing="24px">
-        <Typography variant="h6" sx={{fontWeight: "bold"}}>Curated For You</Typography>
+        <Typography variant="h6" sx={{fontWeight: "bold"}}>{HOME_PAGE_CONSTANTS.CURATED_FOR_YOU_TITLE}</Typography>
 
         <Grid container spacing={3}>
           <Grid size={6}>

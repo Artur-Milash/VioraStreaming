@@ -1,5 +1,6 @@
 import {Box, Button, Stack, Typography} from "@mui/material";
 import HistoryToggleOffIcon from '@mui/icons-material/HistoryToggleOff';
+import {HISTORY_PAGE_CONSTANTS} from "../../../constants/historyPageConstants.ts";
 
 type EmptyHistoryPageProps = {
   onBrowse: () => void;
@@ -32,12 +33,11 @@ export function EmptyHistoryPage({onBrowse}: EmptyHistoryPageProps) {
           <HistoryToggleOffIcon fontSize="large" sx={{color: "#CCC3D8"}} />
         </Box>
         <Typography variant="h5" sx={{fontWeight: 800, fontSize: "36px"}}>
-          History is empty
+          {HISTORY_PAGE_CONSTANTS.EMPTY_TITLE}
         </Typography>
         <Typography variant="body1" color="text.secondary"
                     sx={{maxWidth: "500px", fontSize: "16px", paddingBottom: "40px"}}>
-          Looks like you haven't watched anything yet. Start
-          your journey with our top picks.
+          {HISTORY_PAGE_CONSTANTS.EMPTY_DESCRIPTION}
         </Typography>
         <Button
             variant="contained"
@@ -50,7 +50,7 @@ export function EmptyHistoryPage({onBrowse}: EmptyHistoryPageProps) {
             }}
             onClick={() => onBrowse()}
         >
-          Browse
+          {HISTORY_PAGE_CONSTANTS.EMPTY_BROWSE_BUTTON}
         </Button>
       </Stack>
   )

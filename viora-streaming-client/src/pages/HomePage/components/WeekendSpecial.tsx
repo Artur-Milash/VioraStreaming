@@ -1,5 +1,6 @@
 import type {MovieSummary} from "../../../types/movieTypes.ts";
 import {Box, Stack, Typography} from "@mui/material";
+import {HOME_PAGE_CONSTANTS} from "../../../constants/homePageConstants.ts";
 
 type WeekendSpecialProps = {
   movie: MovieSummary;
@@ -23,7 +24,7 @@ export function WeekendSpecial({movie, onClick}: WeekendSpecialProps) {
           <Typography sx={{
             color: "primary.main",
             textTransform: "uppercase",
-          }}>Weekend Special</Typography>
+          }}>{HOME_PAGE_CONSTANTS.WEEKEND_SPECIAL_LABEL}</Typography>
           <Typography variant="h4" sx={{
             fontWeight: "bold",
           }}>

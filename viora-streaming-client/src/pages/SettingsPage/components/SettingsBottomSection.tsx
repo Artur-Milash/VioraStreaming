@@ -1,4 +1,5 @@
 import { Button, Container } from "@mui/material";
+import {SETTINGS_UI} from "../../../constants/settingsConstants.ts";
 
 type SettingsBottomSectionProps = {
   onSave: () => void;
@@ -24,7 +25,7 @@ export function SettingsBottomSection({ onSave, onDiscard }: SettingsBottomSecti
             }}
             onClick={onDiscard}
         >
-          Discard Changes
+          {SETTINGS_UI.DISCARD_CHANGES_BUTTON}
         </Button>
         <Button
             variant="contained"
@@ -36,7 +37,7 @@ export function SettingsBottomSection({ onSave, onDiscard }: SettingsBottomSecti
             }}
             onClick={onSave}
         >
-          Save Changes
+          {SETTINGS_UI.SAVE_CHANGES_BUTTON}
         </Button>
       </Container>
   );

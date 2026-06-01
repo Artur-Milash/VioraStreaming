@@ -8,6 +8,7 @@ import {
 import {useFilterPanel} from "../../../hooks/useFilterPanel.ts";
 import {GENRES} from "../../../constants/genres.ts";
 import {useState} from "react";
+import {MOVIES_PAGE_CONSTANTS} from "../../../constants/moviesPageConstants.ts";
 
 
 export function FilterPanel() {
@@ -28,7 +29,7 @@ export function FilterPanel() {
       }}>
         <Box>
           <Typography variant="h6" sx={{fontWeight: 700, mb: "32px", fontSize: "20px"}}>
-            Filters
+            {MOVIES_PAGE_CONSTANTS.FILTER_TITLE}
           </Typography>
 
           {/* GENRES */}
@@ -37,7 +38,7 @@ export function FilterPanel() {
           {/* RATING */}
           <Stack direction="row" sx={{mb: "16px", justifyContent: "space-between"}}>
             <Typography variant="body2" color="text.secondary"
-                        sx={{textTransform: "uppercase", fontWeight: 700}}>Rating</Typography>
+                        sx={{textTransform: "uppercase", fontWeight: 700}}>{MOVIES_PAGE_CONSTANTS.FILTER_RATING_LABEL}</Typography>
             <Typography variant="body2" color="primary.main"
                         sx={{fontWeight: 700}}>{committedRating.toFixed(1)}+</Typography>
           </Stack>
@@ -56,7 +57,7 @@ export function FilterPanel() {
           {/* RELEASE YEAR */}
           <Stack direction="row" sx={{mb: "16px"}}>
             <Typography variant="body2" color="text.secondary"
-                        sx={{textTransform: "uppercase", fontWeight: 700}}>Release Year</Typography>
+                        sx={{textTransform: "uppercase", fontWeight: 700}}>{MOVIES_PAGE_CONSTANTS.FILTER_RELEASE_YEAR_LABEL}</Typography>
             <Typography variant="body2" color="primary.main"
                         sx={{fontWeight: 700, textAlign: "right", paddingLeft: "50px"}}>
               {committedReleaseYear[0]} -<br/> {committedReleaseYear[1]}
@@ -75,7 +76,7 @@ export function FilterPanel() {
             textTransform: "uppercase",
             fontWeight: 700,
             mb: "16px"
-          }}>Duration</Typography>
+          }}>{MOVIES_PAGE_CONSTANTS.FILTER_DURATION_LABEL}</Typography>
           <Stack direction="row" spacing="8px" sx={{mb: "32px"}}>
             {LIST_OF_DURATION.map((option) => (
                 <Button
@@ -100,7 +101,7 @@ export function FilterPanel() {
             ))}
           </Stack>
 
-          <VioraButton name="Reset all filters" onClick={handleReset}/>
+          <VioraButton name={MOVIES_PAGE_CONSTANTS.FILTER_RESET_BUTTON} onClick={handleReset}/>
         </Box>
       </Box>
   );
@@ -121,7 +122,7 @@ function Genres({selectedGenres, handleGenreChange}: GenreProps) {
         <Typography variant="body2" color="text.secondary" sx={{
           textTransform: "uppercase", fontWeight: 700, mb: "16px", fontSize: "12px"
         }}>
-          Genres
+          {MOVIES_PAGE_CONSTANTS.FILTER_GENRES_LABEL}
         </Typography>
 
         <Box sx={{
@@ -162,7 +163,7 @@ function Genres({selectedGenres, handleGenreChange}: GenreProps) {
             sx={{textTransform: "none", mb: "24px", p: 0}}
             onClick={() => setShowAll((prev) => !prev)}
         >
-          {showAll ? "Show less" : `Other`}
+          {showAll ? MOVIES_PAGE_CONSTANTS.FILTER_SHOW_LESS : MOVIES_PAGE_CONSTANTS.FILTER_SHOW_MORE}
         </Button>
       </>
   );

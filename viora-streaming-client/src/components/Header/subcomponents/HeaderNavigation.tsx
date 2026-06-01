@@ -1,11 +1,12 @@
 import {Link, Stack} from "@mui/material";
 import {NavLink} from "react-router-dom";
 import {API_PAGE} from "../../../constants/routingConstants.ts";
+import {NAVIGATION_CONSTANTS} from "../../../constants/navigationConstants.ts";
 
 const navItems = [
-  {name: "Home", path: API_PAGE.Home},
-  {name: "Movies", path: API_PAGE.Movies},
-  {name: "History", path: API_PAGE.History},
+  {name: NAVIGATION_CONSTANTS.HOME, path: API_PAGE.Home},
+  {name: NAVIGATION_CONSTANTS.MOVIES, path: API_PAGE.Movies},
+  {name: NAVIGATION_CONSTANTS.HISTORY, path: API_PAGE.History},
 ];
 
 export function HeaderNavigation() {

@@ -14,6 +14,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import SendIcon from "@mui/icons-material/Send";
 import SmartToyIcon from '@mui/icons-material/SmartToy';
 import {useMovieDiscussion} from "../../../hooks/useMovieDiscussion.ts";
+import {ASSISTANT_UI} from "../../../constants/assistantConstants.ts";
 
 type Props = {
   movieId: number;
@@ -66,10 +67,10 @@ export function MovieDiscussionPanel({movieId, onClose, sx}: Props) {
             </Box>
             <Stack>
               <Typography variant="body1" sx={{fontWeight: "bold"}}>
-                Viora AI
+                {ASSISTANT_UI.AI_PANEL_NAME}
               </Typography>
               <Typography variant="caption" sx={{color: "text.secondary", lineHeight: 1.2}}>
-                Movie Expert & Stylist
+                {ASSISTANT_UI.AI_PANEL_SUBTITLE}
               </Typography>
             </Stack>
           </Stack>
@@ -98,7 +99,7 @@ export function MovieDiscussionPanel({movieId, onClose, sx}: Props) {
               </Box>
           ) : messages.length === 0 ? (
               <Typography variant="body2" sx={{color: "text.secondary", textAlign: "center", pt: "32px"}}>
-                Ask anything about this movie
+                {ASSISTANT_UI.ASK_MOVIE_EMPTY_STATE}
               </Typography>
           ) : (
               messages.map((msg) => {
@@ -121,7 +122,7 @@ export function MovieDiscussionPanel({movieId, onClose, sx}: Props) {
                         </Typography>
                       </Box>
                       <Typography variant="caption" sx={{color: "text.disabled", alignSelf: isUser ? "flex-end" : "flex-start", px: "4px"}}>
-                        {isUser ? "YOU" : "AI"} · {time}
+                        {isUser ? ASSISTANT_UI.MESSAGE_SENDER_USER : ASSISTANT_UI.MESSAGE_SENDER_AI} · {time}
                       </Typography>
                     </Box>
                 );
@@ -130,7 +131,7 @@ export function MovieDiscussionPanel({movieId, onClose, sx}: Props) {
           {isSending && (
               <Box sx={{alignSelf: "flex-start", display: "flex", alignItems: "center", gap: "8px"}}>
                 <CircularProgress size={16}/>
-                <Typography variant="caption" sx={{color: "text.secondary"}}>Thinking…</Typography>
+                <Typography variant="caption" sx={{color: "text.secondary"}}>{ASSISTANT_UI.AI_THINKING_TEXT}</Typography>
               </Box>
           )}
           <div ref={bottomRef}/>
@@ -142,7 +143,7 @@ export function MovieDiscussionPanel({movieId, onClose, sx}: Props) {
           <OutlinedInput
               fullWidth
               size="small"
-              placeholder="Ask about this movie…"
+              placeholder={ASSISTANT_UI.ASK_MOVIE_INPUT_PLACEHOLDER}
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && handleSend()}

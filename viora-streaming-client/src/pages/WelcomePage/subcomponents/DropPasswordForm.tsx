@@ -5,6 +5,7 @@ import {CustomField} from "../../../components/Field/CustomField.tsx";
 import {RulesLinearProgress} from "../../../components/LinearProgress/RulesLinearProgress.tsx";
 import {VioraButton} from "../../../components/Button/VioraButton.tsx";
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
+import {AUTH_CONSTANTS} from "../../../constants/authConstants.ts";
 
 type FormData = {
   password: string;
@@ -26,13 +27,13 @@ export function DropPasswordForm({onSubmit, isLoading, error, onSignIn}: DropPas
         <Stack spacing={"32px"}>
           <Stack spacing={"5px"}>
             <Typography variant="h5" align="center" sx={{fontWeight: 700}}>
-              Set new password
+              {AUTH_CONSTANTS.NEW_PASSWORD_TITLE}
             </Typography>
             <Typography variant="body2" align="center" sx={{
               color: "#CCC3D8",
               maxWidth: "90%",
             }}>
-              Your new password must be different from previous passwords
+              {AUTH_CONSTANTS.NEW_PASSWORD_SUBTITLE}
             </Typography>
           </Stack>
 
@@ -55,8 +56,8 @@ export function DropPasswordForm({onSubmit, isLoading, error, onSignIn}: DropPas
                   control={control}
                   defaultValue=""
                   rules={{
-                    required: "Password is required",
-                    validate: (value: string) => value.length >= 8 || "Password must be at least 8 characters"
+                    required: AUTH_CONSTANTS.PASSWORD_REQUIRED,
+                    validate: (value: string) => value.length >= 8 || AUTH_CONSTANTS.PASSWORD_MIN_LENGTH_ERROR
                   }}
                   render={({field, fieldState}) => (
                       <Stack spacing={"10px"} sx={{
@@ -66,13 +67,13 @@ export function DropPasswordForm({onSubmit, isLoading, error, onSignIn}: DropPas
                             {...field}
                             fullWidth
                             type="password"
-                            label="New password"
+                            label={AUTH_CONSTANTS.NEW_PASSWORD_LABEL}
                             error={fieldState.error}
                         />
                         <RulesLinearProgress
                             rules={4}
                             fullFilled={field.value.length / 2}
-                            message={fieldState.error && "Must be at least 8 characters"}/>
+                            message={fieldState.error && AUTH_CONSTANTS.PASSWORD_MIN_LENGTH_HINT}/>
                       </Stack>
                   )}
               />
@@ -82,21 +83,21 @@ export function DropPasswordForm({onSubmit, isLoading, error, onSignIn}: DropPas
                   control={control}
                   defaultValue=""
                   rules={{
-                    required: "Please confirm your password",
-                    validate: (value: string) => value === getValues("password") || "Passwords do not match"
+                    required: AUTH_CONSTANTS.CONFIRM_PASSWORD_REQUIRED,
+                    validate: (value: string) => value === getValues("password") || AUTH_CONSTANTS.PASSWORDS_MISMATCH
                   }}
                   render={({field, fieldState}) => (
                       <CustomField
                           {...field}
                           fullWidth
                           type="password"
-                          label="Confirm Password"
+                          label={AUTH_CONSTANTS.CONFIRM_PASSWORD_LABEL}
                           error={fieldState.error}
                       />
                   )}
               />
 
-              <VioraButton name="Reset password" loading={isLoading}/>
+              <VioraButton name={AUTH_CONSTANTS.RESET_PASSWORD_BUTTON} loading={isLoading}/>
             </Stack>
           </form>
         </Stack>
@@ -112,7 +113,7 @@ export function DropPasswordForm({onSubmit, isLoading, error, onSignIn}: DropPas
                   color="primary"
                   underline={"none"}
                   onClick={onSignIn}>
-              Back to login
+              {AUTH_CONSTANTS.BACK_TO_LOGIN_LINK}
             </Link>
           </Stack>
         </Stack>

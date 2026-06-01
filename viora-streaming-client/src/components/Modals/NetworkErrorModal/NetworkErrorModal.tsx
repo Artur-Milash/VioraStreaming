@@ -3,6 +3,7 @@ import {Box, DialogActions, DialogContent, Typography} from "@mui/material";
 import {Modal} from "../Modal/Modal.tsx";
 import {VioraButton} from "../../Button/VioraButton.tsx";
 import ReportGmailerrorredIcon from '@mui/icons-material/ReportGmailerrorred';
+import {AUTH_CONSTANTS} from "../../../constants/authConstants.ts";
 
 export function NetworkErrorModal({data, onClose}: ModalProps) {
   const modalData = data as {
@@ -37,7 +38,7 @@ export function NetworkErrorModal({data, onClose}: ModalProps) {
           <Typography variant="h5" color={"text.primary"} sx={{
             fontWeight: "bold"
           }}>
-            Network Error
+            {AUTH_CONSTANTS.NETWORK_ERROR_TITLE}
           </Typography>
 
           <Typography variant="body1" color={"text.primary"} align="center">
@@ -47,7 +48,7 @@ export function NetworkErrorModal({data, onClose}: ModalProps) {
         </DialogContent>
 
         <DialogActions>
-          <VioraButton onClick={onClose} name={"Close"} type={"button"}/>
+          <VioraButton onClick={onClose} name={AUTH_CONSTANTS.CLOSE_BUTTON} type={"button"}/>
         </DialogActions>
       </Modal>
   )
