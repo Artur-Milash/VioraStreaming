@@ -1,6 +1,7 @@
 import {Box, InputBase, IconButton} from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import {useRef} from "react";
+import {NAVIGATION_CONSTANTS} from "../../../constants/navigationConstants.ts";
 
 export type SearchFieldProps = {
   onSearch: (query: string) => void;
@@ -25,7 +26,7 @@ export function SearchField({onSearch, onEnter}: SearchFieldProps) {
       >
         <InputBase
             inputRef={inputRef}
-            placeholder="Search movies, genres..."
+            placeholder={NAVIGATION_CONSTANTS.SEARCH_PLACEHOLDER}
             fullWidth
             sx={{
               color: "text.primary",

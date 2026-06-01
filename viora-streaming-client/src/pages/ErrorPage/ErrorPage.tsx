@@ -3,25 +3,7 @@ import {Box, Stack, Typography} from '@mui/material';
 import {VioraLogo} from '../../components/Logo/VioraLogo.tsx';
 import {VioraButton} from '../../components/Button/VioraButton.tsx';
 import {API_PAGE} from '../../constants/routingConstants.ts';
-
-const ERROR_MESSAGES: Record<number, { title: string; description: string }> = {
-  404: {
-    title: 'Page Not Found',
-    description: "The page you're looking for doesn't exist or has been moved.",
-  },
-  401: {
-    title: 'Unauthorized',
-    description: "You don't have permission to view this page.",
-  },
-  403: {
-    title: 'Forbidden',
-    description: "Access to this resource is denied.",
-  },
-  500: {
-    title: 'Server Error',
-    description: 'Something went wrong on our end. Please try again later.',
-  },
-};
+import {ERROR_MESSAGES, ERROR_PAGE_CONSTANTS} from '../../constants/errorPageConstants.ts';
 
 function resolveError(routeError: unknown): { code: number; title: string; description: string } {
   if (isRouteErrorResponse(routeError)) {
@@ -29,15 +11,15 @@ function resolveError(routeError: unknown): { code: number; title: string; descr
     return {
       code: routeError.status,
       title: known?.title ?? routeError.statusText ?? 'Error',
-      description: known?.description ?? 'An unexpected error occurred.',
+      description: known?.description ?? ERROR_PAGE_CONSTANTS.FALLBACK_DESCRIPTION,
     };
   }
 
   if (routeError instanceof Error) {
     return {
       code: 500,
-      title: 'Something Went Wrong',
-      description: routeError.message || 'An unexpected error occurred.',
+      title: ERROR_PAGE_CONSTANTS.FALLBACK_TITLE,
+      description: routeError.message || ERROR_PAGE_CONSTANTS.FALLBACK_DESCRIPTION,
     };
   }
 
@@ -100,7 +82,7 @@ export function ErrorPage() {
           </Typography>
 
           <VioraButton
-              name="Back to Home"
+              name={ERROR_PAGE_CONSTANTS.BACK_TO_HOME_BUTTON}
               type="button"
               onClick={() => navigate(API_PAGE.Home, {replace: true})}
               sx={{mt: 1}}

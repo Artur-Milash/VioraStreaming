@@ -1,5 +1,5 @@
 import {Container, Grid, Stack, Typography} from "@mui/material";
-import {ASSISTANT_DESCRIPTION, MOODS} from "../../../constants/assistantConstants.ts";
+import {ASSISTANT_DESCRIPTION, ASSISTANT_UI, MOODS} from "../../../constants/assistantConstants.ts";
 import {VioraButton} from "../../../components/Button/VioraButton.tsx";
 import {useState} from "react";
 import {MoodCard} from "./MoodCard.tsx";
@@ -23,7 +23,7 @@ export function ChooseMoodSection({onFindMovies, isLoading = false}: ChooseMoodS
         <Stack spacing="8px">
           <Typography variant="h3" sx={{
             fontWeight: "bold",
-          }}>What's your mood?</Typography>
+          }}>{ASSISTANT_UI.MOOD_TITLE}</Typography>
           <Typography variant="body1" sx={{
             color: "#CCC3D8",
             maxWidth: "576px",
@@ -45,7 +45,7 @@ export function ChooseMoodSection({onFindMovies, isLoading = false}: ChooseMoodS
 
         <Stack sx={{alignItems: "center"}}>
           <VioraButton
-              name={"Find my movies"}
+              name={ASSISTANT_UI.FIND_MOVIES_BUTTON}
               sx={{maxWidth: "185px"}}
               onClick={() => onFindMovies(selectedMood)}
               loading={isLoading}

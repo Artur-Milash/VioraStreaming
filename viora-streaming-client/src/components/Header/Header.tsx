@@ -30,35 +30,34 @@ export function Header() {
               sx={{
                 height: "80px",
                 display: "flex",
-                justifyContent: "space-between",
                 alignItems: "center",
-                position: "relative",
+                justifyContent: "space-between",
               }}
           >
-            <Stack direction="row" spacing="48px">
+            <Stack direction="row" spacing="48px" sx={{
+              flexShrink: 0,
+              alignItems: "center"
+            }}>
               <VioraLogo variant="h4" fontSize="24px"/>
               <HeaderNavigation/>
             </Stack>
-
             <Box
                 sx={{
-                  position: "absolute",
-                  left: "60%",
-                  transform: "translateX(-50%)",
-                  width: "700px",
-                  display: "flex",
+                  flexGrow: 1,
+                  display: {xs: "none", md: "flex"},
                   justifyContent: "center",
-                  pointerEvents: "none",
-                  "& > *": {pointerEvents: "auto"}
+                  px: 4,
                 }}
             >
-              <SearchField
-                  onSearch={(searchQuery: string) => dispatch(setTitle(searchQuery))}
-                  onEnter={() => navigate(API_PAGE.Movies)}
-              />
+              <Box sx={{
+                width: "100%",
+                maxWidth: {md: "350px", lg: "550px", xl: "700px"},
+                transition: "max-width 0.2s ease"
+              }}>
+                <SearchField onSearch={(searchQuery: string) => dispatch(setTitle(searchQuery))}/>
+              </Box>
             </Box>
-
-            <Stack direction="row">
+            <Stack direction="row" sx={{flexShrink: 0}}>
               <Avatar
                   src={userAvatar}
                   onClick={() => navigate(API_PAGE.Settings)}

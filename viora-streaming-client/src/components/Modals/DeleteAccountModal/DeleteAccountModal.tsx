@@ -2,11 +2,11 @@ import {Modal} from "../Modal/Modal.tsx";
 import {Button, Container, Stack, Typography} from "@mui/material";
 import type {ModalProps} from "../../../types/modalTypes.ts";
 import ReportProblemIcon from "@mui/icons-material/ReportProblem";
-import {DELETE_ACCOUNT_DESCRIPTION} from "../../../constants/settingsConstants.ts";
+import {DELETE_ACCOUNT_DESCRIPTION, SETTINGS_UI} from "../../../constants/settingsConstants.ts";
 import {SettingsField} from "../../Field/SettingsField.tsx";
 import {useState} from "react";
 
-const CONFIRM_KEYWORD = "DELETE";
+const CONFIRM_KEYWORD = SETTINGS_UI.DELETE_CONFIRM_PLACEHOLDER;
 
 export function DeleteAccountModal({data, onClose}: ModalProps) {
   const {onDelete} = data as { onDelete: () => void };
@@ -38,7 +38,7 @@ export function DeleteAccountModal({data, onClose}: ModalProps) {
                   variant="h5"
                   sx={{fontWeight: "bold", color: "#E5E1E4"}}
               >
-                Delete your account?
+                {SETTINGS_UI.DELETE_MODAL_TITLE}
               </Typography>
 
               <Typography
@@ -50,8 +50,8 @@ export function DeleteAccountModal({data, onClose}: ModalProps) {
             </Stack>
 
             <SettingsField
-                label="Type DELETE to confirm"
-                placeholder="DELETE"
+                label={SETTINGS_UI.DELETE_CONFIRM_LABEL}
+                placeholder={SETTINGS_UI.DELETE_CONFIRM_PLACEHOLDER}
                 fullWidth
                 value={inputValue}
                 onChange={setInputValue}
@@ -73,7 +73,7 @@ export function DeleteAccountModal({data, onClose}: ModalProps) {
                     fontWeight: "bold",
                   }}
               >
-                Cancel
+                {SETTINGS_UI.CANCEL_BUTTON}
               </Button>
               <Button
                   variant="contained"
@@ -87,7 +87,7 @@ export function DeleteAccountModal({data, onClose}: ModalProps) {
                     fontWeight: "bold",
                   }}
               >
-                Delete Account
+                {SETTINGS_UI.CONFIRM_DELETE_BUTTON}
               </Button>
             </Stack>
           </Stack>

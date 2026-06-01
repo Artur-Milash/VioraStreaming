@@ -10,3 +10,24 @@ export const DANGER_ZONE_DESCRIPTION =
 export const DELETE_ACCOUNT_DESCRIPTION =
     "This action is permanent and will delete all your\n" +
     "watch history, lists, and preferences.";
+
+export const SETTINGS_UI = {
+  PAGE_TITLE: "Account Settings",
+  PROFILE_SECTION_TITLE: "Profile Details",
+  FULL_NAME_LABEL: "Full Name",
+  EMAIL_LABEL: "Email",
+  BIO_LABEL: "Bio",
+  DANGER_ZONE_TITLE: "Danger Zone",
+  DELETE_ACCOUNT_BUTTON: "Delete My Account",
+
+  // SettingsBottomSection
+  DISCARD_CHANGES_BUTTON: "Discard Changes",
+  SAVE_CHANGES_BUTTON: "Save Changes",
+
+  // DeleteAccountModal
+  DELETE_MODAL_TITLE: "Delete your account?",
+  DELETE_CONFIRM_LABEL: "Type DELETE to confirm",
+  DELETE_CONFIRM_PLACEHOLDER: "DELETE",
+  CANCEL_BUTTON: "Cancel",
+  CONFIRM_DELETE_BUTTON: "Delete Account",
+} as const;

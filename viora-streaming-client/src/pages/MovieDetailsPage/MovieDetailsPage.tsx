@@ -8,6 +8,7 @@ import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import {MovieAssistantEnabler} from "./components/MovieAssistantEnabler.tsx";
 import {MovieDiscussionPanel} from "./components/MovieDiscussionPanel.tsx";
 import {API_PAGE} from "../../constants/routingConstants.ts";
+import {MOVIE_DETAILS_PAGE_CONSTANTS, getMovieAssistantContent} from "../../constants/movieDetailsPageConstants.ts";
 
 export function MovieDetailsPage() {
   const {id} = useParams<{ id: string }>();
@@ -96,7 +97,7 @@ function MovieDetails({movie, onPlay, onDiscuss}: MovieDetailsProps) {
                 }}
             >
               <PlayArrowIcon sx={{mr: 0.5}}/>
-              Play
+              {MOVIE_DETAILS_PAGE_CONSTANTS.PLAY_BUTTON}
             </Button>
 
             <Button
@@ -110,13 +111,13 @@ function MovieDetails({movie, onPlay, onDiscuss}: MovieDetailsProps) {
                 }}
             >
               <AddIcon/>
-              My List
+              {MOVIE_DETAILS_PAGE_CONSTANTS.MY_LIST_BUTTON}
             </Button>
           </Stack>
         </Stack>
 
         <MovieAssistantEnabler
-            content={`Have questions about "${movie.title}"? Ask our AI about the plot, themes, characters, and more.`}
+            content={getMovieAssistantContent(movie.title)}
             onButtonClick={onDiscuss}
         />
       </Stack>
@@ -131,7 +132,7 @@ function MovieCast({actors}: MovieCastProps) {
   return (
       <Stack spacing="32px">
         <Typography variant="h5" sx={{fontWeight: "bold"}}>
-          Featured Cast
+          {MOVIE_DETAILS_PAGE_CONSTANTS.FEATURED_CAST_TITLE}
         </Typography>
         <Stack spacing="24px" direction="row">
           {actors.map((actor) => (
@@ -169,10 +170,10 @@ function MovieLabels({movie}: { movie: MovieDetails }) {
 
 function MovieOperators({movie}: { movie: MovieDetails }) {
   const operators = [
-    {label: "Director", value: movie.director.name},
-    {label: "Writer", value: movie.writer.name},
-    {label: "Rated", value: movie.rated},
-    {label: "Duration", value: `${movie.durationInMinutes} Min.`},
+    {label: MOVIE_DETAILS_PAGE_CONSTANTS.DIRECTOR_LABEL, value: movie.director.name},
+    {label: MOVIE_DETAILS_PAGE_CONSTANTS.WRITER_LABEL, value: movie.writer.name},
+    {label: MOVIE_DETAILS_PAGE_CONSTANTS.RATED_LABEL, value: movie.rated},
+    {label: MOVIE_DETAILS_PAGE_CONSTANTS.DURATION_LABEL, value: `${movie.durationInMinutes} ${MOVIE_DETAILS_PAGE_CONSTANTS.DURATION_SUFFIX}`},
   ];
 
   return (

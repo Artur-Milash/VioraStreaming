@@ -27,6 +27,7 @@ import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 import {useHls} from "../../../hooks/useHls.ts";
 import {API_PATHS} from "../../../constants/apiConstants.ts";
 import {MovieDiscussionPanel} from "../../MovieDetailsPage/components/MovieDiscussionPanel.tsx";
+import {ASSISTANT_UI} from "../../../constants/assistantConstants.ts";
 
 interface PlayerProps {
   movieId: string;
@@ -276,7 +277,7 @@ export function Player({
 
                 <Chip
                     icon={<AutoAwesome sx={{fontSize: 15}}/>}
-                    label="AI"
+                    label={ASSISTANT_UI.AI_CHIP_LABEL}
                     size="small"
                     onClick={() => setChatOpen((o) => !o)}
                     sx={{
@@ -295,7 +296,7 @@ export function Player({
               </Stack>
 
               <Box sx={{display: "flex", alignItems: "center", justifyContent: "center", gap: 3}}>
-                <Tooltip title="Replay 10s">
+                <Tooltip title={ASSISTANT_UI.REPLAY_TOOLTIP}>
                   <IconButton onClick={() => skip(-10)} sx={centerGhostBtnSx}>
                     <Replay10 sx={{fontSize: 36, color: "text.secondary"}}/>
                   </IconButton>
@@ -315,7 +316,7 @@ export function Player({
                   {isPlaying ? <Pause sx={{fontSize: 38}}/> : <PlayArrow sx={{fontSize: 38}}/>}
                 </IconButton>
 
-                <Tooltip title="Forward 10s">
+                <Tooltip title={ASSISTANT_UI.FORWARD_TOOLTIP}>
                   <IconButton onClick={() => skip(10)} sx={centerGhostBtnSx}>
                     <Forward10 sx={{fontSize: 36, color: "text.secondary"}}/>
                   </IconButton>
@@ -364,7 +365,7 @@ export function Player({
 
                   <Box sx={{flex: 1}}/>
 
-                  <Tooltip title={isFullscreen ? "Exit Fullscreen" : "Fullscreen"}>
+                  <Tooltip title={isFullscreen ? ASSISTANT_UI.EXIT_FULLSCREEN_TOOLTIP : ASSISTANT_UI.FULLSCREEN_TOOLTIP}>
                     <IconButton onClick={toggleFullscreen} sx={bottomBtnSx}>
                       {isFullscreen ? <FullscreenExit/> : <Fullscreen/>}
                     </IconButton>

@@ -4,6 +4,7 @@ import {Modal} from "../Modal/Modal.tsx";
 import {VioraButton} from "../../Button/VioraButton.tsx";
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import {useTheme} from "@mui/material/styles";
+import {AUTH_CONSTANTS} from "../../../constants/authConstants.ts";
 
 
 export function EmailVerificationModal({data, onClose}: ModalProps) {
@@ -41,7 +42,7 @@ export function EmailVerificationModal({data, onClose}: ModalProps) {
           <Typography variant="h5" color={"text.primary"} sx={{
             fontWeight: "bold"
           }}>
-            Check your inbox
+            {AUTH_CONSTANTS.CHECK_INBOX_TITLE}
           </Typography>
 
           <Typography variant="body1" color={"text.primary"} align="center">
@@ -51,7 +52,7 @@ export function EmailVerificationModal({data, onClose}: ModalProps) {
         </DialogContent>
 
         <DialogActions>
-          <VioraButton onClick={modalData.onBtnClick} name={"Send Again"} type={"button"}
+          <VioraButton onClick={modalData.onBtnClick} name={AUTH_CONSTANTS.SEND_AGAIN_BUTTON} type={"button"}
                        loading={modalData.isLoading}/>
         </DialogActions>
       </Modal>
