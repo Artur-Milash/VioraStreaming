@@ -14,6 +14,7 @@ export function HistoryMovieCard({history, onClick}: HistoryMovieCardProps) {
   return (
       <Stack onClick={onClick} spacing="16px" sx={{
         cursor: "pointer",
+        width: "100%",
         minWidth: 0
       }}>
         <Box sx={{position: "relative"}}>
