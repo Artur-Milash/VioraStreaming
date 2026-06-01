@@ -69,6 +69,9 @@ client:
   register-callback-url: ${CLIENT_REGISTER_CALLBACK_URL:http://localhost:80/auth}
   dropped-callback-url: ${CLIENT_DROPPED_CALLBACK_URL:http://localhost:80/auth/drop-password}
 
+streaming:
+  segments-path: ${SEGMENTS_PATH:/movies/segments}
+
 verification:
   register-callback-url: http://${server.host}:${server.port}/api/v1/verification/accounts/register?token=
   dropped-callback-url: http://${server.host}:${server.port}/api/v1/verification/accounts/drop-password?token=
