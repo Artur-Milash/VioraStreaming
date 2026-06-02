@@ -169,9 +169,14 @@ function MovieLabels({movie}: { movie: MovieDetails }) {
 }
 
 function MovieOperators({movie}: { movie: MovieDetails }) {
+
+  const takeFirstName = (name: string) => {
+    return name.split(',')[0];
+  }
+
   const operators = [
-    {label: MOVIE_DETAILS_PAGE_CONSTANTS.DIRECTOR_LABEL, value: movie.director.name},
-    {label: MOVIE_DETAILS_PAGE_CONSTANTS.WRITER_LABEL, value: movie.writer.name},
+    {label: MOVIE_DETAILS_PAGE_CONSTANTS.DIRECTOR_LABEL, value: takeFirstName(movie.director.name)},
+    {label: MOVIE_DETAILS_PAGE_CONSTANTS.WRITER_LABEL, value: takeFirstName(movie.writer.name)},
     {label: MOVIE_DETAILS_PAGE_CONSTANTS.RATED_LABEL, value: movie.rated},
     {label: MOVIE_DETAILS_PAGE_CONSTANTS.DURATION_LABEL, value: `${movie.durationInMinutes} ${MOVIE_DETAILS_PAGE_CONSTANTS.DURATION_SUFFIX}`},
   ];
