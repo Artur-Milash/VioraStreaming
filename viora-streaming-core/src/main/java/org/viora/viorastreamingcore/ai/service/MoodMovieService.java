@@ -27,7 +27,7 @@ public class MoodMovieService {
   private final SecurityHelpers securityHelpers;
   private final ObjectMapper objectMapper;
 
-  record AiSuggestion(long movieId, int matchScore) {}
+  public record AiSuggestion(long movieId, int matchScore) {}
 
   public MoodMovieService(
       ChatClient.Builder chatClientBuilder,
