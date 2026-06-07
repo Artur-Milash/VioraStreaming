@@ -30,9 +30,10 @@ import {MovieDiscussionPanel} from "../../MovieDetailsPage/components/MovieDiscu
 import {ASSISTANT_UI} from "../../../constants/assistantConstants.ts";
 
 interface PlayerProps {
-  movieId: string;
+  movieId?: string;
   dbMovieId: number;
-  apiBaseUrl: string;
+  apiBaseUrl?: string;
+  videoUrl?: string | null;
   title?: string;
   onClose?: () => void;
   startFrom?: number;
@@ -54,12 +55,12 @@ function formatRemaining(current: number, total: number): string {
 }
 
 export function Player({
-                         movieId,
                          dbMovieId,
                          apiBaseUrl,
                          title = "Now Playing",
                          onClose,
-                         startFrom
+                         startFrom,
+                         videoUrl,
                        }: PlayerProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -75,7 +76,7 @@ export function Player({
   const [showControls, setShowControls] = useState(true);
   const [chatOpen, setChatOpen] = useState(false);
 
-  const playlistUrl = `${apiBaseUrl}${API_PATHS.streaming}/${movieId}/index.m3u8`;
+  const playlistUrl = `${apiBaseUrl}${API_PATHS.streaming}/${videoUrl}`;
 
   const {isHlsLoading, hlsError} = useHls({
     src: playlistUrl,
@@ -270,7 +271,8 @@ export function Player({
                 )}
 
                 <Box sx={{flex: 1}}>
-                  <Typography variant="h6" sx={{color: "text.primary", fontWeight: 700, lineHeight: 1.2}}>
+                  <Typography variant="h6"
+                              sx={{color: "text.primary", fontWeight: 700, lineHeight: 1.2}}>
                     {title}
                   </Typography>
                 </Box>
@@ -289,7 +291,10 @@ export function Player({
                       letterSpacing: 0.5,
                       height: 28,
                       cursor: "pointer",
-                      "& .MuiChip-icon": {ml: "6px", color: chatOpen ? "primary.contrastText" : "primary.main"},
+                      "& .MuiChip-icon": {
+                        ml: "6px",
+                        color: chatOpen ? "primary.contrastText" : "primary.main"
+                      },
                       "&:hover": {backgroundColor: chatOpen ? "primary.dark" : "rgba(255,255,255,0.08)"},
                     }}
                 />
@@ -365,7 +370,8 @@ export function Player({
 
                   <Box sx={{flex: 1}}/>
 
-                  <Tooltip title={isFullscreen ? ASSISTANT_UI.EXIT_FULLSCREEN_TOOLTIP : ASSISTANT_UI.FULLSCREEN_TOOLTIP}>
+                  <Tooltip
+                      title={isFullscreen ? ASSISTANT_UI.EXIT_FULLSCREEN_TOOLTIP : ASSISTANT_UI.FULLSCREEN_TOOLTIP}>
                     <IconButton onClick={toggleFullscreen} sx={bottomBtnSx}>
                       {isFullscreen ? <FullscreenExit/> : <Fullscreen/>}
                     </IconButton>

@@ -31,6 +31,14 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres_db:5432/${POSTGRES_DB}
       SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
       SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
+      SEGMENTS_PATH: /movies/segments
+    volumes:
+      - type: bind
+        source: ${MOVIES_PATH}
+        target: /movies/segments
+        read_only: true
+        bind:
+          create_host_path: false
     ports:
       - "${SERVER_PORT:-8080}:${SERVER_PORT:-8080}"
     depends_on:
@@ -83,7 +91,7 @@ services:
     environment:
       - OLLAMA_HOST=http://ollama:11434
     entrypoint: >
-      /bin/sh -c "
+     /bin/sh -c "
         ollama pull nomic-embed-text &&
         ollama pull llama3.2 &&
         echo 'Models ready!'

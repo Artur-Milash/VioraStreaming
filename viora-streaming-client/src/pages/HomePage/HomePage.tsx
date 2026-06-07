@@ -19,8 +19,9 @@ export default function HomePage() {
 
   if (isLoading || historyLoading) {
     return (
-        <Box sx={{display: "flex", justifyContent: "center", alignItems: "center", height: "100vh"}}>
-          <CircularProgress />
+        <Box
+            sx={{display: "flex", justifyContent: "center", alignItems: "center", height: "100vh"}}>
+          <CircularProgress/>
         </Box>
     );
   }
@@ -41,37 +42,35 @@ export default function HomePage() {
 type ContinueWatchingProps = { histories: History[] };
 
 function ContinueWatchingSection({histories}: ContinueWatchingProps) {
+  const navigate = useNavigate();
+
   return (
       <Stack spacing="24px">
         <Stack direction="row" sx={{justifyContent: "space-between", alignItems: "center"}}>
-          <Typography variant="h5" sx={{fontWeight: "bold"}}>{HOME_PAGE_CONSTANTS.CONTINUE_WATCHING_TITLE}</Typography>
+          <Typography variant="h5" sx={{fontWeight: "bold"}}>
+            {HOME_PAGE_CONSTANTS.CONTINUE_WATCHING_TITLE}
+          </Typography>
           <Link component={NavLink} to={API_PAGE.History} underline="none">
             {HOME_PAGE_CONSTANTS.VIEW_ALL_LINK}
           </Link>
         </Stack>
 
-        {/*
-        MovieCard is aspectRatio 2/3 with width filling the cell.
-        At minmax(160px, 1fr) the card height ≈ 160 * 1.5 = 240px.
-        Text below adds ~56px. Total row ≈ 296px + 24px gap = 320px.
-        Setting height to that value clips any second row cleanly.
-      */}
         <Box
             sx={{
               display: "grid",
               gridTemplateColumns: "repeat(auto-fill, minmax(160px, 1fr))",
               gap: "24px",
-              height: "320px",   // card (240) + text (56) + gap buffer
-              overflow: "hidden",
+              minHeight: "320px",
               alignItems: "start",
             }}
         >
-          {histories.map((history) => (
-              <HistoryMovieCard
-                  history={history}
-                  onClick={() => {
-                  }}
-              />
+          {histories.slice(0, 6).map((history) => (
+              <Box key={history.movie.id}>
+                <HistoryMovieCard
+                    history={history}
+                    onClick={() => navigate(`${API_PAGE.Movies}/${history.movie.id}`)}
+                />
+              </Box>
           ))}
         </Box>
       </Stack>
@@ -85,19 +84,19 @@ function TrendingNowSection({movies}: TrendingNowProps) {
 
   return (
       <Stack spacing="24px">
-        <Typography variant="h5" sx={{fontWeight: "bold"}}>{HOME_PAGE_CONSTANTS.TRENDING_NOW_TITLE}</Typography>
+        <Typography variant="h5"
+                    sx={{fontWeight: "bold"}}>{HOME_PAGE_CONSTANTS.TRENDING_NOW_TITLE}</Typography>
 
         <Box
             sx={{
               display: "grid",
               gridTemplateColumns: "repeat(auto-fill, minmax(160px, 1fr))",
               gap: "24px",
-              height: "320px",
-              overflow: "hidden",
+              minHeight: "320px",
               alignItems: "start",
             }}
         >
-          {movies.map((movie) => (
+          {movies.slice(0, 6).map((movie) => (
               <Box key={movie.id}>
                 <TrendingMovieCard
                     movie={movie}
@@ -117,7 +116,8 @@ function CuratedForYou({movie}: CuratedForYouProps) {
 
   return (
       <Stack spacing="24px">
-        <Typography variant="h6" sx={{fontWeight: "bold"}}>{HOME_PAGE_CONSTANTS.CURATED_FOR_YOU_TITLE}</Typography>
+        <Typography variant="h6"
+                    sx={{fontWeight: "bold"}}>{HOME_PAGE_CONSTANTS.CURATED_FOR_YOU_TITLE}</Typography>
 
         <Grid container spacing={3}>
           <Grid size={6}>

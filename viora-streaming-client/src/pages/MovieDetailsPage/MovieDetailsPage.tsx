@@ -27,7 +27,8 @@ export function MovieDetailsPage() {
   }
 
   const handlePlay = () => {
-    navigate(`/${API_PAGE.Movies}/${id}/player`);
+    if (movie.videoUrl) navigate(`/${API_PAGE.Movies}/${id}/player`);
+    else navigate(API_PAGE.Error);
   };
 
   return (
@@ -99,6 +100,7 @@ function MovieDetails({movie, onPlay, onDiscuss, onAddToList, isSaving}: MovieDe
             <Button
                 variant="contained"
                 onClick={onPlay}
+                disabled={!movie.videoUrl}
                 sx={{
                   textTransform: "none",
                   fontWeight: "bold",
@@ -181,9 +183,14 @@ function MovieLabels({movie}: { movie: MovieDetails }) {
 }
 
 function MovieOperators({movie}: { movie: MovieDetails }) {
+
+  const takeFirstName = (name: string) => {
+    return name.split(',')[0];
+  }
+
   const operators = [
-    {label: MOVIE_DETAILS_PAGE_CONSTANTS.DIRECTOR_LABEL, value: movie.director.name},
-    {label: MOVIE_DETAILS_PAGE_CONSTANTS.WRITER_LABEL, value: movie.writer.name},
+    {label: MOVIE_DETAILS_PAGE_CONSTANTS.DIRECTOR_LABEL, value: takeFirstName(movie.director.name)},
+    {label: MOVIE_DETAILS_PAGE_CONSTANTS.WRITER_LABEL, value: takeFirstName(movie.writer.name)},
     {label: MOVIE_DETAILS_PAGE_CONSTANTS.RATED_LABEL, value: movie.rated},
     {label: MOVIE_DETAILS_PAGE_CONSTANTS.DURATION_LABEL, value: `${movie.durationInMinutes} ${MOVIE_DETAILS_PAGE_CONSTANTS.DURATION_SUFFIX}`},
   ];

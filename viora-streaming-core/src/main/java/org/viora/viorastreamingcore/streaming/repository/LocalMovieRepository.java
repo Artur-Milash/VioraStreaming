@@ -4,6 +4,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import lombok.SneakyThrows;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Repository;
@@ -11,16 +12,15 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class LocalMovieRepository implements StreamingRepository {
 
-  //TODO this is going to be changed when I will fix docker compose
-  // Currently it is working only on local machine
-  private static final String ROOT_SEGMENTS_FOLDER_PATH =
-      System.getProperty("user.home") + "/Desktop/movies/segments/";
   private static final int MINIMAL_SEGMENT_ID_LENGTH = 3;
+
+  @Value("${streaming.segments-path}")
+  private String rootSegmentsFolderPath;
 
   @Override
   @SneakyThrows
   public Resource getMoviePlayback(String movieId) {
-    Path playlistPath = Paths.get(ROOT_SEGMENTS_FOLDER_PATH, movieId, "playlist.m3u8");
+    Path playlistPath = Paths.get(rootSegmentsFolderPath, movieId, "playlist.m3u8");
     if (!Files.exists(playlistPath)) {
       throw new IllegalArgumentException("Playlist not found for movie " + movieId);
     }
@@ -31,7 +31,7 @@ public class LocalMovieRepository implements StreamingRepository {
   @SneakyThrows
   public Resource getMovieSegment(String movieId, Long segment) {
     String segmentStringId = String.format("segment_%s.ts", getSegmentStringId(segment));
-    Path segmentPath = Paths.get(ROOT_SEGMENTS_FOLDER_PATH, movieId, segmentStringId);
+    Path segmentPath = Paths.get(rootSegmentsFolderPath, movieId, segmentStringId);
     if (!Files.exists(segmentPath)) {
       throw new IllegalArgumentException("Segment " + segment + " not found for movie " + movieId);
     }
