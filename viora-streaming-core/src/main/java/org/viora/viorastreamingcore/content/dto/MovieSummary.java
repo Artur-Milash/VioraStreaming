@@ -10,6 +10,7 @@ public record MovieSummary(
     String title,
     String poster,
     LocalDate releaseDate,
+    String videoUrl,
     Set<GenreDto> genres,
     Float rating,
     Long durationInMinutes,

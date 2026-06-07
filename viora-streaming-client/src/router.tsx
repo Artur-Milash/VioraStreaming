@@ -46,6 +46,10 @@ export const routes: RouteObject[] = [
             element: <HistoryPage/>
           },
           {
+            path: API_PAGE.Error,
+            element: <ErrorPage/>
+          },
+          {
             path: API_PAGE.Settings,
             element: <SettingsPage/>
           },

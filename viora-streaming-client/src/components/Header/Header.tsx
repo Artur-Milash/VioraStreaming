@@ -54,7 +54,11 @@ export function Header() {
                 maxWidth: {md: "350px", lg: "550px", xl: "700px"},
                 transition: "max-width 0.2s ease"
               }}>
-                <SearchField onSearch={(searchQuery: string) => dispatch(setTitle(searchQuery))}/>
+                <SearchField onSearch={(searchQuery: string) => dispatch(setTitle(searchQuery))}
+                             onEnter={(query: string) => {
+                               dispatch(setTitle(query));
+                               navigate(API_PAGE.Movies);
+                             }}/>
               </Box>
             </Box>
             <Stack direction="row" sx={{flexShrink: 0}}>

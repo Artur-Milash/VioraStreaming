@@ -37,9 +37,6 @@ public class Movie {
   @Column(nullable = false, columnDefinition = "TEXT")
   private String plot;
 
-  @Column(columnDefinition = "TEXT")
-  private String synopsis;
-
   @Column(nullable = false, columnDefinition = "TEXT")
   private String poster;
 

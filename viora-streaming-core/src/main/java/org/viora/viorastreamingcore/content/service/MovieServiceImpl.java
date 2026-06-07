@@ -14,7 +14,6 @@ import org.viora.viorastreamingcore.content.dto.MovieDto;
 import org.viora.viorastreamingcore.content.dto.MovieFilter;
 import org.viora.viorastreamingcore.content.dto.MovieSummary;
 import org.viora.viorastreamingcore.content.exception.MovieNotFoundException;
-import org.viora.viorastreamingcore.content.model.Genre;
 import org.viora.viorastreamingcore.content.model.Movie;
 import org.viora.viorastreamingcore.content.repository.MovieRepository;
 
@@ -72,6 +71,7 @@ public class MovieServiceImpl implements MovieService {
         .title(m.getTitle())
         .poster(m.getPoster())
         .releaseDate(m.getReleaseDate())
+        .videoUrl(m.getVideoUrl())
         .genres(m.getGenres().stream().map(genre -> new GenreDto(genre.getId(), genre.getName()))
             .collect(Collectors.toSet()))
         .rating(m.getRating())
