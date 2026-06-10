@@ -120,18 +120,18 @@ function CuratedForYou({movie}: CuratedForYouProps) {
                     sx={{fontWeight: "bold"}}>{HOME_PAGE_CONSTANTS.CURATED_FOR_YOU_TITLE}</Typography>
 
         <Grid container spacing={3}>
-          <Grid size={6}>
+          <Grid size={{xs: 12, md: 6}}>
             <WeekendSpecial
                 movie={movie}
                 onClick={() => navigate(`${API_PAGE.Movies}/${movie.id}`)}
             />
           </Grid>
-          <Grid size={3}>
+          <Grid size={{xs: 6, md: 3}}>
             <SmartRecommender
                 onClick={() => navigate(API_PAGE.Assistant)}
             />
           </Grid>
-          <Grid size={3}>
+          <Grid size={{xs: 6, md: 3}}>
             <JoinTheCommunity/>
           </Grid>
         </Grid>

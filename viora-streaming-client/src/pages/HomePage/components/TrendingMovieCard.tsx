@@ -21,8 +21,9 @@ export function TrendingMovieCard({movie, onClick}: TrendingMovieCardProps) {
               sx={{
                 fontWeight: "bold",
                 overflow: "hidden",
-                textOverflow: "ellipsis",
-                whiteSpace: "nowrap",
+                display: "-webkit-box",
+                WebkitLineClamp: 2,
+                WebkitBoxOrient: "vertical",
               }}
           >
             {movie.title}
