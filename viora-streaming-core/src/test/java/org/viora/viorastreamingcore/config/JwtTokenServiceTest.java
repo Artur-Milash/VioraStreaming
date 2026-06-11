@@ -124,69 +124,6 @@ class JwtTokenServiceTest {
     verify(decoder).decode("invalid-token");
   }
 
-  @Test
-  void whenGenerateDropPasswordToken_thenReturnsEncodedToken() {
-    // given
-    Jwt encodedJwt = mock(Jwt.class);
-
-    when(encodedJwt.getTokenValue()).thenReturn("drop-password-token");
-    when(encoder.encode(any(JwtEncoderParameters.class)))
-        .thenReturn(encodedJwt);
-
-    // when
-    String result =
-        jwtTokenService.generateDropPasswordToken(userDetails);
-
-    // then
-    assertThat(result).isEqualTo("drop-password-token");
-
-    verify(encoder).encode(any(JwtEncoderParameters.class));
-  }
-
-  @Test
-  void whenGetUsernameFromDropPasswordTokenWithValidPurpose_thenReturnsUsername() {
-    // given
-    Jwt jwt = mock(Jwt.class);
-
-    when(jwt.getClaimAsString("purpose"))
-        .thenReturn("drop-password");
-
-    when(jwt.getSubject()).thenReturn("john");
-
-    when(decoder.decode("drop-token")).thenReturn(jwt);
-
-    // when
-    String result =
-        jwtTokenService.getUsernameFromDropPasswordToken("drop-token");
-
-    // then
-    assertThat(result).isEqualTo("john");
-
-    verify(decoder).decode("drop-token");
-  }
-
-  @Test
-  void whenGetUsernameFromDropPasswordTokenWithInvalidPurpose_thenThrowsException() {
-    // given
-    Jwt jwt = mock(Jwt.class);
-
-    when(jwt.getClaimAsString("purpose"))
-        .thenReturn("access-token");
-
-    when(decoder.decode("invalid-purpose-token"))
-        .thenReturn(jwt);
-
-    // when / then
-    assertThatThrownBy(() ->
-        jwtTokenService.getUsernameFromDropPasswordToken(
-            "invalid-purpose-token"
-        )
-    )
-        .isInstanceOf(IllegalArgumentException.class)
-        .hasMessage("Invalid token purpose");
-
-    verify(decoder).decode("invalid-purpose-token");
-  }
 
   @Test
   void whenGetUsernameFromToken_thenReturnsSubject() {

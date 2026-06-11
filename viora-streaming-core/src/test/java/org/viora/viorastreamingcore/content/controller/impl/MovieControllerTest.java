@@ -106,7 +106,6 @@ class MovieControllerTest {
         movieId,
         "Interstellar",
         "plot",
-        "synopsis",
         "poster.jpg",
         "PG-13",
         8.6f,

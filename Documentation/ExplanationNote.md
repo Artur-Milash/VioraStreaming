@@ -2520,3 +2520,321 @@ Each page provides:
 * Explanation message
 * Navigation back to the application
 
+# QA Engineer
+
+## Testing Results and Quality Assurance Summary
+
+### Overview
+
+Quality assurance activities for the Viora platform focused on validating the stability, correctness, and reliability of the backend services that support authentication, content management, AI integration, streaming, verification workflows, and user history management.
+
+Testing was primarily performed through automated unit and integration tests, with code coverage measured using JaCoCo.
+
+---
+
+# Overall Test Coverage Results
+
+## Global Coverage Metrics
+
+| Metric               | Result |
+| -------------------- | ------ |
+| Instruction Coverage | 73%    |
+| Branch Coverage      | 56%    |
+| Total Classes        | 81     |
+| Tested Classes       | 67     |
+| Total Methods        | 206    |
+| Tested Methods       | 161    |
+| Total Lines          | 598    |
+| Covered Lines        | 438    |
+
+---
+
+## Coverage Overview
+
+| Category     | Covered | Missed | Coverage |
+| ------------ | ------- | ------ | -------- |
+| Instructions | 2,098   | 758    | 73%      |
+| Branches     | 49      | 37     | 56%      |
+| Methods      | 161     | 45     | 78%      |
+| Classes      | 67      | 14     | 83%      |
+
+---
+
+# Module Coverage Results
+
+## High-Coverage Modules
+
+The following modules achieved excellent test coverage and represent the most thoroughly validated parts of the system.
+
+| Module                          | Instruction Coverage | Branch Coverage |
+| ------------------------------- | -------------------- | --------------- |
+| Account Service                 | 100%                 | 100%            |
+| Auth Service                    | 100%                 | 100%            |
+| Streaming Service               | 100%                 | 100%            |
+| Verification Controller         | 100%                 | N/A             |
+| Account Controller              | 100%                 | N/A             |
+| Content Controller              | 100%                 | N/A             |
+| Streaming Controller            | 100%                 | N/A             |
+| Auth Controller                 | 100%                 | N/A             |
+| Mail Service                    | 92%                  | N/A             |
+| History Service                 | 91%                  | 100%            |
+| Content Service                 | 98%                  | 93%             |
+| Verification Service Strategies | 86%                  | 75%             |
+
+---
+
+## Medium-Coverage Modules
+
+| Module             | Instruction Coverage | Branch Coverage |
+| ------------------ | -------------------- | --------------- |
+| AI Service         | 70%                  | 58%             |
+| Content DTO        | 76%                  | N/A             |
+| Account DTO        | 80%                  | N/A             |
+| Mail Messages      | 56%                  | 50%             |
+| AI Controller      | 56%                  | N/A             |
+| History Controller | 56%                  | N/A             |
+
+---
+
+## Low-Coverage Modules
+
+The following modules were identified as areas for future testing improvements.
+
+| Module                     | Instruction Coverage | Branch Coverage |
+| -------------------------- | -------------------- | --------------- |
+| Security Configuration     | 41%                  | 0%              |
+| Verification Configuration | 0%                   | 0%              |
+| Utility Configuration      | 0%                   | N/A             |
+| Core Configuration         | 0%                   | N/A             |
+| Streaming Repository       | 0%                   | 0%              |
+| Application Bootstrap      | 0%                   | N/A             |
+
+These components mainly contain framework configuration, dependency injection definitions, or infrastructure wiring logic that provides limited business value for direct unit testing.
+
+---
+
+# Test Coverage by Functional Area
+
+## Authentication Module
+
+Coverage Status: Excellent
+
+Tested functionality:
+
+* User registration
+* User login
+* JWT generation
+* JWT validation
+* Authentication service logic
+* Authentication controllers
+* Authorization workflows
+
+Coverage:
+
+| Component       | Coverage |
+| --------------- | -------- |
+| Auth Controller | 100%     |
+| Auth Service    | 100%     |
+| Account Service | 100%     |
+
+---
+
+## Verification Module
+
+Coverage Status: Very Good
+
+Tested functionality:
+
+* Email verification flow
+* Password reset verification
+* Verification strategy execution
+* JWT verification token validation
+* Verification controller endpoints
+
+Coverage:
+
+| Component               | Coverage |
+| ----------------------- | -------- |
+| Verification Controller | 100%     |
+| Verification Strategies | 86%      |
+| Branch Coverage         | 75%      |
+
+---
+
+## Content Module
+
+Coverage Status: Excellent
+
+Tested functionality:
+
+* Movie retrieval
+* Filtering operations
+* Pagination
+* Content service business logic
+* REST endpoints
+
+Coverage:
+
+| Component          | Coverage |
+| ------------------ | -------- |
+| Content Service    | 98%      |
+| Content Controller | 100%     |
+
+---
+
+## Streaming Module
+
+Coverage Status: Excellent
+
+Tested functionality:
+
+* Streaming endpoints
+* Streaming service logic
+* Segment delivery workflows
+
+Coverage:
+
+| Component            | Coverage |
+| -------------------- | -------- |
+| Streaming Service    | 100%     |
+| Streaming Controller | 100%     |
+
+---
+
+## History Module
+
+Coverage Status: Excellent
+
+Tested functionality:
+
+* Watch history creation
+* History retrieval
+* Progress tracking
+* User viewing records
+
+Coverage:
+
+| Component          | Coverage |
+| ------------------ | -------- |
+| History Service    | 91%      |
+| History Controller | 56%      |
+
+---
+
+## AI Module
+
+Coverage Status: Moderate
+
+Tested functionality:
+
+* AI recommendation services
+* AI controller endpoints
+* Prompt processing
+* Movie recommendation workflows
+
+Coverage:
+
+| Component     | Coverage |
+| ------------- | -------- |
+| AI Service    | 70%      |
+| AI Controller | 56%      |
+
+Additional testing opportunities remain for external AI integration scenarios and failure handling cases.
+
+---
+
+# Coverage Distribution Chart
+
+```text
+100% |
+ 95% | Content Service
+ 90% | History Service
+ 85% | Verification Service
+ 80% | Account DTO
+ 75% | Content DTO
+ 70% | AI Service
+ 65% |
+ 60% |
+ 55% | AI Controller
+ 50% | Mail Messages
+ 45% |
+ 40% | Security Config
+ 35% |
+ 30% |
+ 25% |
+ 20% |
+ 15% |
+ 10% |
+  5% |
+  0% | Configurations / Repository Infrastructure
+```
+
+---
+
+# Defect Prevention and Validation Activities
+
+The testing process included validation of:
+
+## Functional Testing
+
+* User authentication workflows
+* Registration process
+* Email verification
+* Password recovery
+* Movie browsing and filtering
+* Streaming functionality
+* Watch history tracking
+* AI recommendation generation
+
+---
+
+## API Testing
+
+Verified:
+
+* Request validation
+* Response structures
+* HTTP status codes
+* Authentication requirements
+* Error responses
+
+---
+
+## Security-Oriented Testing
+
+Validated:
+
+* JWT authentication mechanisms
+* Authorization enforcement
+* Verification token validation
+* Secure password reset flow
+* Protected endpoint access
+
+---
+
+## Error Handling Testing
+
+Verified:
+
+* Invalid requests
+* Unauthorized access attempts
+* Missing resources
+* Internal server error handling
+* Validation failures
+
+---
+
+# Testing Conclusions
+
+The Viora MVP achieved a strong overall testing result with:
+
+* **73% instruction coverage**
+* **56% branch coverage**
+* **83% class coverage**
+* Full coverage of critical business services
+
+The most important business domains—including authentication, account management, content delivery, streaming, and verification workflows—achieved high coverage levels and were extensively validated.
+
+Areas with lower coverage are primarily infrastructure and framework configuration classes, which have limited business logic and therefore lower testing priority.
+
+Overall, the testing results demonstrate that the implemented MVP provides a stable and reliable foundation for the core streaming and AI-assisted movie recommendation functionality planned for the Viora platform.
