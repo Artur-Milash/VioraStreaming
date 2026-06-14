@@ -12,10 +12,10 @@ The state management is built using **Redux Toolkit (@reduxjs/toolkit)**.
 
 ```
 store/
-├── auth.ts
-├── filterSlice.ts
-├── modals.ts
-├── store.ts
+--- auth.ts
+--- filterSlice.ts
+--- modals.ts
+--- store.ts
 ```
 
 ---
