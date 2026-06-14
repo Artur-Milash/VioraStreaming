@@ -1124,6 +1124,60 @@ Local HLS Storage
 
 # 2. Quality Metrics
 
+# Quality Metrics & Triage Statistics
+
+## Summary
+
+- **Total Scenarios Tested:** 9
+- **Successfully Closed:** 9
+- **Pass Rate:** 100%
+
+---
+
+# Test Execution Results
+
+All planned test scenarios were completed successfully with no deviations from the expected results.
+
+| Scenario | Module | Status | Comments |
+|-----------|---------|---------|----------|
+| Handling Non-Existent Routes (404 Page) | All Pages | Passed | Works correctly; the 404 page is displayed as expected. |
+| System Behavior After Session Expiration (60 Minutes) | Authentication | Passed | The system allows users to log in again without errors. |
+| Movie Metadata Display | Movie | Passed | Titles and metadata are displayed correctly with proper spacing. |
+| Header Responsiveness During Window Resize | Header | Passed | Header elements adapt correctly without overlapping. |
+| Search Using a Relevant Query | Home (Search) | Passed | The system successfully displays relevant search results. |
+| Redirect to Login After Session Cleanup | Auth / Home | Passed | No crashes observed; the user is redirected to the login page correctly. |
+| "Curated For You" Cards Interactivity | Home | Passed | Cards are clickable and redirect users correctly. |
+| "Trending Now" Cards Interactivity | Home | Passed | Cards are clickable and successfully navigate to movie details. |
+| Navigate to Profile Settings | Header | Passed | Clicking the profile icon successfully opens the Settings page. |
+
+---
+
+# Environment Information
+
+Final product testing was performed in the following environment:
+
+| Component | Details |
+|------------|----------|
+| Operating System | Windows 11 |
+| Browser | Google Chrome 149.0.7827.53 |
+
+---
+
+# Bug Statistics
+
+## Overview
+
+During the testing and quality assurance process, a total of **9 defects** were identified across the application.
+
+### Bug Summary
+
+| Metric           | Count |
+| ---------------- | ----- |
+| Total Bugs Found | 9     |
+| Total Bugs Fixed | 9     |
+| Open Bugs        | 0     |
+| Fix Rate         | 100%  |
+
 
 # 3. Conclusions
 
