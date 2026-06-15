@@ -1179,6 +1179,340 @@ During the testing and quality assurance process, a total of **9 defects** were 
 | Fix Rate         | 100%  |
 
 
+## Test Summary
+
+| Metric | Value |
+|----------|----------|
+| Total Requests Sent | 740 |
+| Requests per Second (RPS) | 12.16 |
+| Average Response Time | 754 ms |
+| P90 Response Time | 901 ms |
+| P95 Response Time | 2,918 ms |
+| P99 Response Time | 14,550 ms |
+| Error Rate | 0.00% |
+| Failure Rate | 0.00% |
+| Peak CPU Usage | 99.8% |
+| Peak Memory Usage | 94.4% |
+
+---
+
+# Backend Performance Metrics
+
+## 1. Response Time
+
+### Description
+Response time measures how long the API takes to process a request and return a response.
+
+### Results
+
+| Metric | Value |
+|----------|----------|
+| Average Response Time | 754 ms |
+| Minimum Response Time | 40 ms |
+| Maximum Response Time | 16,606 ms |
+
+### Interpretation
+- The average response time of **754 ms** indicates acceptable overall performance.
+- The maximum response time of **16.6 seconds** suggests occasional latency spikes under load.
+- Performance optimization may be required for peak-load scenarios.
+
+---
+
+## 2. Percentile Response Times
+
+### Description
+Percentiles show how response times are distributed across all requests.
+
+### Results
+
+| Percentile | Value |
+|------------|---------|
+| P90 | 901 ms |
+| P95 | 2,918 ms |
+| P99 | 14,550 ms |
+
+### Interpretation
+
+#### P90 = 901 ms
+90% of all requests completed within 901 ms.
+
+#### P95 = 2,918 ms
+95% of all requests completed within 2.9 seconds.
+
+#### P99 = 14,550 ms
+99% of all requests completed within 14.5 seconds.
+
+### Analysis
+The significant difference between P95 and P99 indicates the presence of outlier requests experiencing substantial delays. Further investigation into backend processing, database operations, or infrastructure bottlenecks is recommended.
+
+---
+
+## 3. Throughput (Requests per Second)
+
+### Description
+Throughput measures the number of requests processed by the system per second.
+
+### Result
+
+| Metric | Value |
+|----------|----------|
+| Requests per Second | 12.16 req/s |
+
+### Interpretation
+The API sustained an average throughput of approximately **12 requests per second** during the test period.
+
+---
+
+## 4. Request Volume
+
+### Description
+Total number of requests executed during the test.
+
+### Result
+
+| Metric | Value |
+|----------|----------|
+| Total Requests | 740 |
+
+### Interpretation
+The test generated 740 API requests over a one-minute execution period.
+
+---
+
+## 5. Error Rate
+
+### Description
+The percentage of requests that returned an error response.
+
+### Result
+
+| Metric | Value |
+|----------|----------|
+| Error Rate | 0.00% |
+
+### Interpretation
+No API errors were detected during testing, indicating stable application behavior.
+
+---
+
+## 6. Failure Rate
+
+### Description
+The percentage of failed requests caused by network issues, timeouts, or assertion failures.
+
+### Result
+
+| Metric | Value |
+|----------|----------|
+| Failure Rate | 0.00% |
+
+### Interpretation
+No request failures occurred during the test execution.
+
+---
+
+## 7. Resource Utilization
+
+### CPU Usage
+
+| Metric | Value |
+|----------|----------|
+| Peak CPU Usage | 99.8% |
+
+#### Analysis
+CPU utilization reached nearly 100%, indicating the application or host system operated close to its processing capacity.
+
+### Memory Usage
+
+| Metric | Value |
+|----------|----------|
+| Peak Memory Usage | 94.4% |
+
+#### Analysis
+Memory consumption remained very high during the test and approached resource limits.
+
+---
+
+# Load Testing Configuration
+
+| Parameter | Value |
+|------------|---------|
+| Virtual Users (VU) | 10 |
+| Test Duration | 1 minute |
+| Load Profile | Fixed |
+| Request Type | GET |
+| Endpoint Tested | Viora test |
+
+---
+# Frontend Performance Metrics
+
+## Overview
+
+This document summarizes the frontend performance testing results obtained using Google Lighthouse. The assessment evaluates page load speed, rendering efficiency, responsiveness, and visual stability of the Viora Streaming Client web application.
+
+**Application:** Viora Streaming Client  
+**Page Tested:** `/home`  
+**Testing Tool:** Google Lighthouse  
+**Environment:** Local Development (`localhost`)  
+**Audit Date:** June 2026
+
+---
+
+# Performance Score
+
+| Metric | Value |
+|----------|----------|
+| Lighthouse Performance Score | 98 / 100 |
+
+### Assessment
+
+A score of **98** indicates excellent frontend performance and user experience. The application meets modern web performance standards and provides fast rendering and responsiveness.
+
+---
+
+# Core Performance Metrics
+
+## 1. First Contentful Paint (FCP)
+
+### Description
+Measures the time required for the browser to render the first visible content on the page.
+
+### Result
+
+| Metric | Value |
+|----------|----------|
+| First Contentful Paint | 0.7 s |
+
+### Interpretation
+
+- Excellent performance.
+- Users receive visual feedback almost immediately after loading the page.
+- Well below Google's recommended threshold of **1.8 seconds**.
+
+---
+
+## 2. Largest Contentful Paint (LCP)
+
+### Description
+Measures the time required to render the largest visible element within the viewport.
+
+### Result
+
+| Metric | Value |
+|----------|----------|
+| Largest Contentful Paint | 1.0 s |
+
+### Interpretation
+
+- Outstanding loading performance.
+- Significantly better than Google's recommended threshold of **2.5 seconds**.
+- Indicates fast loading of primary content.
+
+---
+
+## 3. Total Blocking Time (TBT)
+
+### Description
+Measures the total amount of time during which the main thread was blocked and unable to respond to user interactions.
+
+### Result
+
+| Metric | Value |
+|----------|----------|
+| Total Blocking Time | 20 ms |
+
+### Interpretation
+
+- Minimal JavaScript execution delays.
+- User interactions remain highly responsive.
+- Far below the recommended threshold of **200 ms**.
+
+---
+
+## 4. Speed Index
+
+### Description
+Measures how quickly the visible contents of a page are displayed during page load.
+
+### Result
+
+| Metric | Value |
+|----------|----------|
+| Speed Index | 0.8 s |
+
+### Interpretation
+
+- Page content becomes visible extremely quickly.
+- Provides a smooth and responsive user experience.
+
+---
+
+## 5. Cumulative Layout Shift (CLS)
+
+### Description
+Measures unexpected visual layout changes that occur while the page is loading.
+
+### Result
+
+| Metric | Value |
+|----------|----------|
+| Cumulative Layout Shift | 0.003 |
+
+### Interpretation
+
+- Excellent visual stability.
+- No noticeable layout jumps or content shifts.
+- Well below Google's recommended maximum of **0.1**.
+
+---
+
+# Core Web Vitals Assessment
+
+| Metric | Result | Google Threshold |
+|----------|----------|----------|
+| FCP | 0.7 s | < 1.8 s |
+| LCP | 1.0 s | < 2.5 s |
+| TBT | 20 ms | < 200 ms |
+| CLS | 0.003 | < 0.1 |
+
+### Status
+
+All measured Core Web Vitals meet or exceed Google's recommended performance thresholds.
+
+---
+
+# Performance Analysis
+
+## Strengths
+
+### Fast Initial Rendering
+The page displays content within 0.7 seconds, ensuring users receive immediate visual feedback.
+
+### Efficient Resource Loading
+The largest visible content loads in only 1 second, indicating optimized assets and rendering.
+
+### High Responsiveness
+The extremely low Total Blocking Time demonstrates efficient JavaScript execution and minimal main-thread congestion.
+
+### Excellent Visual Stability
+A CLS score of 0.003 indicates that page elements remain stable throughout the loading process.
+
+### Near-Perfect Lighthouse Score
+The application achieved a Lighthouse Performance Score of 98/100, reflecting a highly optimized frontend implementation.
+
+---
+
+### Overall Result
+
+| Category | Status |
+|----------|--------|
+| Performance Score | Excellent (98/100) |
+| Loading Speed | Excellent |
+| Responsiveness | Excellent |
+| Visual Stability | Excellent |
+| Core Web Vitals Compliance | Passed |
+
+
 # 3. Conclusions
 
 ## Implemented Functionality (MVP Results)
