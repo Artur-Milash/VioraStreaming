@@ -1,3 +1,11 @@
+<p align="center">
+  <img src="branding/logo_primary.svg" width="120" alt="Viora logo">
+</p>
+
+<p align="center">
+  <img src="branding/banner.png" alt="Viora banner" width="100%">
+</p>
+
 # Deployment Guide
 
 ## System Requirements
