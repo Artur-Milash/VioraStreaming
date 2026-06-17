@@ -1,6 +1,17 @@
-<p align="center">
-  <img src="branding/logo_primary.svg" width="120" alt="Viora logo">
-</p>
+<table>
+<tr>
+<td width="150">
+<img src="branding/logo_primary.png" width="120" alt="Viora logo">
+</td>
+<td>
+
+# VIORA
+
+*Where your mood finds its movie*
+
+</td>
+</tr>
+</table>
 
 <p align="center">
   <img src="branding/banner.png" alt="Viora banner" width="100%">
