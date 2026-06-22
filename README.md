@@ -23,9 +23,9 @@
 This repository includes a full marketing and branding kit in [`marketing_kit/`](marketing_kit), covering everything needed to present and promote Viora:
 
 - **[`branding/`](marketing_kit/branding)** — logo files (primary, light, dark themes), hero banner, and brand style guide (colors, typography, tagline).
-- **[`video/`](marketing_kit/video)** — product promo video thumbnail and related visual assets.
-- **[`copywriting/`](marketing_kit/copywriting)** — ready-to-use post templates (emotional, technical storytelling, Product Hunt launch) and social media content calendar.
-- **[`strategy/`](marketing_kit/strategy)** — channel selection rationale and audience acquisition plan.
+- **[`video/`](marketing_kit/video)** — product promotional video and its thumbnail.
+- **[`copywriting/`](marketing_kit/copywriting)** — elevator pitch.
+- **[`strategy/`](marketing_kit/strategy)** — market analysis, ready-to-use post templates (emotional, technical storytelling, Product Hunt launch) and social media content calendar.
 
 
 # Deployment Guide
