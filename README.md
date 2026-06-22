@@ -1,7 +1,7 @@
 <table>
 <tr>
 <td width="150">
-<img src="branding/logo_primary.svg" width="120" alt="Viora logo">
+<img src="marketing_kit/branding/logo_primary.svg" width="120" alt="Viora logo">
 </td>
 <td>
 
@@ -14,8 +14,19 @@
 </table>
 
 <p align="center">
-  <img src="branding/banner.png" alt="Viora banner" width="100%">
+  <img src="marketing_kit/branding/banner.png" alt="Viora banner" width="100%">
 </p>
+
+
+## Marketing Kit
+
+This repository includes a full marketing and branding kit in [`marketing_kit/`](marketing_kit), covering everything needed to present and promote Viora:
+
+- **[`branding/`](marketing_kit/branding)** — logo files (primary, light, dark themes), hero banner, and brand style guide (colors, typography, tagline).
+- **[`video/`](marketing_kit/video)** — product promotional video and its thumbnail.
+- **[`copywriting/`](marketing_kit/copywriting)** — elevator pitch.
+- **[`strategy/`](marketing_kit/strategy)** — market analysis, ready-to-use post templates (emotional, technical storytelling, Product Hunt launch) and social media content calendar.
+
 
 # Deployment Guide
 
