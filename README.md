@@ -1,7 +1,7 @@
 <table>
 <tr>
 <td width="150">
-<img src="branding/logo_primary.svg" width="120" alt="Viora logo">
+<img src="marketing_kit/branding/logo_primary.svg" width="120" alt="Viora logo">
 </td>
 <td>
 
@@ -14,7 +14,7 @@
 </table>
 
 <p align="center">
-  <img src="branding/banner.png" alt="Viora banner" width="100%">
+  <img src="marketing_kit/branding/banner.png" alt="Viora banner" width="100%">
 </p>
 
 # Deployment Guide
