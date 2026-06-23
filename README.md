@@ -174,14 +174,24 @@ docker compose logs -f postgres_db
 
 ## Application URLs
 
-| Service      | URL                                   |
-| ------------ | ------------------------------------- |
-| Frontend     | http://localhost                      |
-| Backend API  | http://localhost:8080                 |
-| Health Check | http://localhost:8080/actuator/health |
-| Ollama API   | http://localhost:11434                |
-
+| Service               | URL                                         |
+|-----------------------|---------------------------------------------|
+| Frontend              | http://localhost                            |
+| Backend API           | http://localhost:8080                       |
+| Health Check          | http://localhost:8080/actuator/health       |
+| Ollama API            | http://localhost:11434                      |
+| Swagger UI            | http://localhost:8080/swagger-ui/index.html |
 ---
+
+## Project Resources
+
+| Module | URL |
+|--------|-----|
+| Project documentation | https://app.notion.com/p/Viora-Streaming-Project-hub-329c1923554580ed980af40bdc10f7aa|
+| Project Design       | https://www.figma.com/design/7HfHDIhR42ZhtFNz4KwZHH/Viora---Wireframes?node-id=54-537&p=f|
+| Logo Design | https://www.figma.com/design/7HfHDIhR42ZhtFNz4KwZHH/Viora---Wireframes?node-id=0-1&p=f|
+| User Flow | https://www.figma.com/board/4VQYhVrFCv067BN3iG4jdl/Viora---User-Flows?node-id=0-1&p=f|
+
 
 ## Database
 
